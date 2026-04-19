@@ -1,0 +1,578 @@
+"""Static site generator — render items into HTML.
+
+Output structure (under ~/.tech-radar/site/):
+  index.html                    # today's items
+  archive/YYYY-MM-DD.html       # one page per past day (last 14 days)
+  data/YYYY-MM-DD.json          # raw items for that day (for re-render)
+"""
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from dataclasses import asdict
+from datetime import date, datetime
+from html import escape
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from core import STATE_DIR, Item, log
+
+REPO_DIR = Path(__file__).resolve().parent.parent
+SITE_DIR = REPO_DIR / "docs"
+DATA_DIR = SITE_DIR / "data"
+ARCHIVE_DIR = SITE_DIR / "archive"
+
+RETENTION_DAYS = 14
+AVATAR_URL = "https://github.com/hueanmy.png"
+
+ICONS = {
+    "Events": "📅",
+    "Anthropic News": "📣",
+    "Engineering Blog": "🛠️",
+    "Claude Code Changelog": "🚀",
+    "Anthropic Courses": "🎓",
+    "AI YouTube": "📺",
+    "Electron": "🖥️",
+    "Apple/iOS": "🍎",
+    "Playwright": "🎭",
+    "GitHub Trending": "📈",
+    "Security": "🛡️",
+}
+
+CSS = """
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #09090b;
+  --bg-subtle: #0c0c0f;
+  --surface: #111114;
+  --surface-2: #18181c;
+  --surface-3: #202024;
+  --border: #1f1f24;
+  --border-strong: #2d2d33;
+  --text: #e4e4e7;
+  --text-strong: #fafafa;
+  --muted: #71717a;
+  --muted-2: #a1a1aa;
+  --accent: #a78bfa;
+  --accent-2: #818cf8;
+  --accent-soft: rgba(167, 139, 250, 0.12);
+  --accent-border: rgba(167, 139, 250, 0.3);
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.4);
+  --glow: 0 0 40px -10px rgba(167, 139, 250, 0.25);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(ellipse 800px 400px at 50% -100px, rgba(167, 139, 250, 0.08), transparent),
+    radial-gradient(ellipse 600px 300px at 100% 400px, rgba(129, 140, 248, 0.05), transparent);
+  background-attachment: fixed;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent-soft); color: var(--text-strong); }
+
+.layout {
+  display: grid;
+  grid-template-columns: 272px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────── */
+aside.sidebar {
+  background: var(--bg-subtle);
+  border-right: 1px solid var(--border);
+  padding: 24px 0 16px;
+  position: sticky; top: 0; align-self: start;
+  max-height: 100vh; overflow-y: auto;
+  backdrop-filter: blur(8px);
+}
+aside.sidebar::-webkit-scrollbar { width: 4px; }
+aside.sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+aside .brand {
+  padding: 0 20px 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+aside .brand-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+aside .brand-logo .logo-mark {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  padding: 2px; display: grid; place-items: center;
+  box-shadow: var(--glow);
+}
+aside .brand-logo .logo-mark img {
+  width: 100%; height: 100%; border-radius: 50%;
+  display: block; background: var(--bg);
+}
+aside .brand h1 {
+  margin: 0; font-size: 15px; font-weight: 600;
+  letter-spacing: -0.015em; color: var(--text-strong);
+}
+aside .brand .tagline {
+  margin: 2px 0 0; font-size: 11px; color: var(--muted);
+  letter-spacing: 0.01em;
+}
+aside .section-label {
+  padding: 0 20px 10px; font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted); font-weight: 600;
+}
+aside ul.nav-dates {
+  list-style: none; padding: 0 10px; margin: 0;
+}
+aside ul.nav-dates li { margin: 1px 0; }
+aside ul.nav-dates li a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 12px; font-size: 13px; color: var(--muted-2);
+  border-radius: 7px; transition: all 0.12s ease;
+  font-weight: 500;
+}
+aside ul.nav-dates li a:hover {
+  background: var(--surface-2); color: var(--text-strong);
+}
+aside ul.nav-dates li a.current {
+  background: var(--accent-soft); color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-border);
+}
+aside ul.nav-dates li a .badge {
+  background: var(--surface-2); color: var(--muted);
+  font-size: 10.5px; padding: 1px 7px; border-radius: 10px;
+  font-weight: 600; min-width: 24px; text-align: center;
+}
+aside ul.nav-dates li a.current .badge {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+}
+
+/* ── Main content ────────────────────────────────────── */
+main.content {
+  padding: 40px 48px 80px;
+  max-width: 920px;
+  width: 100%;
+}
+
+.page-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 6px;
+}
+.page-header h2 {
+  margin: 0; font-size: 30px; font-weight: 700;
+  letter-spacing: -0.025em; color: var(--text-strong);
+  display: flex; align-items: center; gap: 12px;
+}
+.page-header h2 .pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15); }
+  50% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0.05); }
+}
+.page-header .meta-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  background: var(--surface-2); color: var(--muted-2);
+  font-size: 12px; font-weight: 500;
+  border: 1px solid var(--border);
+}
+.subtitle {
+  color: var(--muted-2); font-size: 14px;
+  margin: 8px 0 28px; padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.subtitle strong { color: var(--text-strong); font-weight: 600; }
+
+/* Controls */
+.controls {
+  margin-bottom: 20px; display: flex; gap: 8px;
+}
+.controls button {
+  background: var(--surface); color: var(--muted-2);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 14px; cursor: pointer;
+  font: inherit; font-size: 12.5px; font-weight: 500;
+  transition: all 0.12s ease;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.controls button:hover {
+  color: var(--text-strong); border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+
+/* ── Groups ───────────────────────────────────────────── */
+details.group {
+  margin-bottom: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.2s ease;
+}
+details.group:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
+}
+details.group[open] {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+details.group summary {
+  cursor: pointer; padding: 14px 18px;
+  display: flex; gap: 12px; align-items: center;
+  list-style: none; user-select: none;
+  transition: background 0.12s ease;
+}
+details.group summary:hover { background: var(--surface-2); }
+details.group summary::-webkit-details-marker { display: none; }
+details.group summary::before {
+  content: ""; width: 6px; height: 6px;
+  border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted);
+  transform: rotate(-45deg); margin-left: 2px;
+  transition: transform 0.15s ease;
+}
+details.group[open] summary::before { transform: rotate(45deg); }
+
+details.group .source-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--surface-3);
+  display: grid; place-items: center;
+  font-size: 15px; flex-shrink: 0;
+}
+details.group .source-name {
+  font-size: 14.5px; font-weight: 600; color: var(--text-strong);
+  letter-spacing: -0.005em;
+}
+details.group .count {
+  margin-left: auto;
+  background: var(--surface-2); color: var(--muted-2);
+  font-size: 11.5px; font-weight: 600;
+  padding: 3px 9px; border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+ul.items { list-style: none; padding: 4px 18px 14px; margin: 0; }
+ul.items li {
+  padding: 11px 0;
+  border-top: 1px solid var(--border);
+  transition: opacity 0.12s ease;
+}
+ul.items li:first-child { border-top: 0; }
+ul.items a.title {
+  color: var(--text); font-weight: 500; line-height: 1.45;
+  font-size: 14px;
+  display: block;
+  transition: color 0.12s ease;
+}
+ul.items a.title:hover { color: var(--accent); }
+ul.items .date {
+  color: var(--muted); font-size: 11.5px; margin-top: 4px;
+  display: flex; align-items: center; gap: 6px;
+}
+ul.items .date::before {
+  content: ""; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--muted); display: inline-block;
+}
+
+.empty {
+  color: var(--muted-2); text-align: center; padding: 100px 20px;
+  font-size: 14px;
+}
+.empty .emoji {
+  font-size: 48px; display: block; margin-bottom: 14px;
+  opacity: 0.6;
+}
+.empty .hint { color: var(--muted); font-size: 12.5px; margin-top: 6px; }
+
+footer.page-footer {
+  color: var(--muted); font-size: 11.5px;
+  margin-top: 56px; padding-top: 18px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+}
+footer.page-footer a { color: var(--muted-2); }
+footer.page-footer a:hover { color: var(--accent); }
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 820px) {
+  .layout { grid-template-columns: 1fr; }
+  aside.sidebar {
+    position: static; max-height: none; padding: 16px 0 14px;
+    border-right: 0; border-bottom: 1px solid var(--border);
+  }
+  aside .brand { border-bottom: 0; padding-bottom: 12px; margin-bottom: 10px; }
+  aside .section-label { padding: 0 16px 6px; }
+  aside ul.nav-dates {
+    display: flex; overflow-x: auto; padding: 0 12px 4px; gap: 6px;
+    scrollbar-width: none;
+  }
+  aside ul.nav-dates::-webkit-scrollbar { display: none; }
+  aside ul.nav-dates li a {
+    border: 1px solid var(--border);
+    padding: 6px 12px; white-space: nowrap;
+  }
+  aside ul.nav-dates li a.current { box-shadow: none; border-color: var(--accent-border); }
+  main.content { padding: 28px 20px 60px; }
+  .page-header h2 { font-size: 24px; }
+}
+"""
+
+
+def _format_vn_day(d: date) -> str:
+    names = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"]
+    return f"{names[d.weekday()]} {d.day:02d}/{d.month:02d}"
+
+
+def _count_items(d: date) -> int:
+    path = DATA_DIR / f"{d.isoformat()}.json"
+    if not path.exists():
+        return 0
+    try:
+        return len(json.loads(path.read_text()))
+    except Exception:
+        return 0
+
+
+def _render_sidebar(current_day: date, today: date, past: list[date]) -> str:
+    ordered = [today] + [d for d in past if d != today]
+    items_html = []
+    for d in ordered[:RETENTION_DAYS]:
+        is_current = d == current_day
+        is_today = d == today
+        href = "index.html" if is_today else f"{d.isoformat()}.html"
+        # When rendered inside archive/*.html, fix prefix
+        if current_day != today:
+            href = f"../index.html" if is_today else f"{d.isoformat()}.html"
+        label = "Hôm nay" if is_today else _format_vn_day(d)
+        count = _count_items(d)
+        badge = f'<span class="badge">{count}</span>' if count else ""
+        cls = "current" if is_current else ""
+        items_html.append(
+            f'<li><a class="{cls}" href="{escape(href)}">'
+            f'<span>{escape(label)}</span>{badge}</a></li>'
+        )
+    return f"""<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-logo">
+      <div class="logo-mark"><img src="{AVATAR_URL}" alt="logo"></div>
+      <div>
+        <h1>Tech Radar</h1>
+        <p class="tagline">Daily · AI · Security</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-label">Lịch sử · {RETENTION_DAYS} ngày</div>
+  <ul class="nav-dates">{"".join(items_html)}</ul>
+</aside>"""
+
+
+def _render_page(current_day: date, today: date, past: list[date],
+                 items: list[Item], title: str, subtitle: str) -> str:
+    by_source: dict[str, list[Item]] = {}
+    for it in items:
+        by_source.setdefault(it.source, []).append(it)
+
+    sections = []
+    for source in sorted(by_source):
+        icon = ICONS.get(source, "•")
+        lis = []
+        for it in by_source[source]:
+            date_html = f'<div class="date">{escape(it.published)}</div>' if it.published else ""
+            lis.append(
+                f'<li><a class="title" href="{escape(it.url)}" target="_blank" rel="noopener">'
+                f'{escape(it.title)}</a>{date_html}</li>'
+            )
+        sections.append(
+            f'<details class="group" open>'
+            f'<summary>'
+            f'<span class="source-icon">{icon}</span>'
+            f'<span class="source-name">{escape(source)}</span>'
+            f'<span class="count">{len(by_source[source])}</span>'
+            f'</summary>'
+            f'<ul class="items">{"".join(lis)}</ul></details>'
+        )
+
+    if sections:
+        controls = (
+            '<div class="controls">'
+            '<button onclick="document.querySelectorAll(\'details.group\').forEach(d=>d.open=true)">'
+            'Mở tất cả</button>'
+            '<button onclick="document.querySelectorAll(\'details.group\').forEach(d=>d.open=false)">'
+            'Đóng tất cả</button>'
+            '</div>'
+        )
+        body = controls + "".join(sections)
+    else:
+        body = ('<div class="empty"><span class="emoji">🌙</span>'
+                'Chưa có item nào trong ngày này.'
+                '<div class="hint">Ghé lại sau khi radar chạy tiếp.</div></div>')
+
+    sidebar = _render_sidebar(current_day, today, past)
+
+    return f"""<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<link rel="icon" type="image/png" href="{AVATAR_URL}">
+<link rel="apple-touch-icon" href="{AVATAR_URL}">
+<title>{escape(title)} — Tech Radar</title>
+<style>{CSS}</style>
+</head>
+<body>
+<div class="layout">
+{sidebar}
+<main class="content">
+  <div class="page-header">
+    <h2>{"<span class='pulse'></span>" if current_day == today else ""}<span>{escape(title)}</span></h2>
+    <div class="meta-badge">● Live · {datetime.now():%H:%M}</div>
+  </div>
+  <div class="subtitle">{subtitle}</div>
+  {body}
+  <footer class="page-footer">
+    <span>Tech Radar · built {datetime.now():%Y-%m-%d %H:%M}</span>
+    <a href="https://github.com/hueanmy/tech-radar" target="_blank">source ↗</a>
+  </footer>
+</main>
+</div>
+</body>
+</html>"""
+
+
+def _save_today_data(items: list[Item], day: date) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    path = DATA_DIR / f"{day.isoformat()}.json"
+    existing: list[dict] = []
+    if path.exists():
+        try:
+            existing = json.loads(path.read_text())
+        except Exception:
+            existing = []
+    seen_ids = {e.get("url", "").rstrip("/") for e in existing}
+    for it in items:
+        if it.id not in seen_ids:
+            existing.append(asdict(it))
+    path.write_text(json.dumps(existing, indent=2, ensure_ascii=False))
+
+
+def _load_day(day: date) -> list[Item]:
+    path = DATA_DIR / f"{day.isoformat()}.json"
+    if not path.exists():
+        return []
+    try:
+        raw = json.loads(path.read_text())
+        return [Item(**r) for r in raw]
+    except Exception:
+        return []
+
+
+def _archive_days(exclude: date) -> list[date]:
+    if not DATA_DIR.exists():
+        return []
+    days = []
+    for p in DATA_DIR.glob("*.json"):
+        try:
+            d = date.fromisoformat(p.stem)
+            if d != exclude:
+                days.append(d)
+        except ValueError:
+            pass
+    return sorted(days, reverse=True)
+
+
+def _cleanup_old(today: date, past: list[date]) -> list[date]:
+    """Delete data + archive files older than RETENTION_DAYS. Return kept past days."""
+    keep = past[:RETENTION_DAYS]
+    drop = past[RETENTION_DAYS:]
+    for d in drop:
+        (DATA_DIR / f"{d.isoformat()}.json").unlink(missing_ok=True)
+        (ARCHIVE_DIR / f"{d.isoformat()}.html").unlink(missing_ok=True)
+    if drop:
+        log(f"  ✓ Retention: dropped {len(drop)} day(s) older than {RETENTION_DAYS}d")
+    return keep
+
+
+def build_site(today_items: list[Item]) -> Path:
+    today = datetime.now().astimezone().date()
+    SITE_DIR.mkdir(parents=True, exist_ok=True)
+    ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+
+    if today_items:
+        _save_today_data(today_items, today)
+
+    past_all = _archive_days(exclude=today)
+    past = _cleanup_old(today, past_all)
+
+    # Rebuild every archive page (sidebar state changes when a new day arrives)
+    for d in past:
+        day_items = _load_day(d)
+        if not day_items:
+            continue
+        html = _render_page(
+            current_day=d, today=today, past=past,
+            items=day_items,
+            title=f"{_format_vn_day(d)}",
+            subtitle=f"<strong>{len(day_items)}</strong> item · {d.isoformat()}",
+        )
+        (ARCHIVE_DIR / f"{d.isoformat()}.html").write_text(html)
+
+    index_items = _load_day(today)
+    index_html = _render_page(
+        current_day=today, today=today, past=past,
+        items=index_items,
+        title="Hôm nay",
+        subtitle=f"<strong>{len(index_items)}</strong> item · {today.isoformat()} · cập nhật {datetime.now():%H:%M}",
+    )
+    index_path = SITE_DIR / "index.html"
+    index_path.write_text(index_html)
+
+    log(f"  ✓ Site rebuilt: {index_path}")
+    _git_sync()
+    return index_path
+
+
+def _git_sync() -> None:
+    """Commit docs/ + push to GitHub Pages repo. No-op if not a git repo."""
+    if not (REPO_DIR / ".git").exists():
+        return
+    try:
+        status = subprocess.run(
+            ["git", "-C", str(REPO_DIR), "status", "--porcelain", "docs"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if not status.stdout.strip():
+            return
+        msg = f"Site update {datetime.now():%Y-%m-%d %H:%M}"
+        subprocess.run(["git", "-C", str(REPO_DIR), "add", "docs"], check=True, timeout=10)
+        subprocess.run(
+            ["git", "-C", str(REPO_DIR), "commit", "-m", msg],
+            check=True, timeout=10, capture_output=True,
+        )
+        subprocess.run(
+            ["git", "-C", str(REPO_DIR), "push", "--quiet"],
+            check=True, timeout=30, capture_output=True,
+        )
+        log(f"  ✓ Site pushed to GitHub Pages")
+    except subprocess.CalledProcessError as e:
+        log(f"  ✗ Git sync failed: {e.stderr.decode() if e.stderr else e}")
+    except Exception as e:
+        log(f"  ✗ Git sync error: {e}")

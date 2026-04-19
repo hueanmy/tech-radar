@@ -1,0 +1,44 @@
+# Tech Radar — source config
+# Mỗi source có enabled + tuỳ chọn riêng (channels, keywords, feeds...).
+
+sources:
+  anthropic:
+    enabled: true
+    feeds: [news, engineering, changelog, courses, events]
+
+  youtube:
+    enabled: true
+    # channel_id lấy từ URL "view-source:" của kênh YouTube (tìm "channelId")
+    channels:
+      - {name: "Fireship",           id: "UCsBjURrPoezykLs9EqgamOA"}
+      - {name: "AI Explained",       id: "UCNJ1Ymd5yFuUPtn21xtRbbw"}
+      - {name: "Matt Wolfe",         id: "UChpleBmo18P08aKCIgti38g"}
+      - {name: "Matthew Berman",     id: "UCawZsQWqfGSbCI5yjkdVkTA"}
+      - {name: "Two Minute Papers",  id: "UCbfYPyITQ-7l4upoX8nvctg"}
+    # Lọc keyword (case-insensitive, substring match). Rỗng = không lọc.
+    keywords: []
+
+  electron:
+    enabled: true
+
+  apple:
+    enabled: true
+
+  playwright:
+    enabled: true
+
+  github_trending:
+    enabled: true
+    # Ngôn ngữ cần theo dõi (empty = all languages)
+    languages: [typescript, python, swift, rust]
+    # Chỉ giữ repo có keyword này trong title/description
+    keywords: [ai, llm, agent, mcp, claude, gpt, rag, llama]
+
+  security:
+    enabled: true
+    # Rỗng = lấy hết feeds; điền tên để chỉ bật một số
+    # Options: "The Hacker News", "Bleeping Computer", "Krebs on Security",
+    #          "Schneier on Security", "SecurityWeek", "Google Project Zero"
+    feeds: []
+    # Filter keyword (case-insensitive, rỗng = không lọc)
+    keywords: []

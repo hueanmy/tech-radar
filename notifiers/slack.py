@@ -47,8 +47,11 @@ ICONS = {
 }
 
 
+MAX_ITEMS_PER_CATEGORY = 5
+
+
 def format_slack_message(new_items: list[Item]) -> dict:
-    """Compact digest — summary per source + CTA link to the site."""
+    """Compact digest — summary + item list per source + CTA link to the site."""
     by_source: dict[str, list[Item]] = {}
     for item in new_items:
         by_source.setdefault(item.source, []).append(item)
@@ -65,16 +68,27 @@ def format_slack_message(new_items: list[Item]) -> dict:
         {"type": "context", "elements": [{"type": "mrkdwn",
                                           "text": f"_Quét lúc {datetime.now():%Y-%m-%d %H:%M}_"}]},
         {"type": "section", "text": {"type": "mrkdwn", "text": summary}},
-        {
-            "type": "actions",
-            "elements": [{
-                "type": "button",
-                "style": "primary",
-                "text": {"type": "plain_text", "text": "📖 Đọc đầy đủ trên Tech Radar"},
-                "url": SITE_URL,
-            }],
-        },
+        {"type": "divider"},
     ]
+
+    for source, items in sorted(by_source.items()):
+        icon = ICONS.get(source, "•")
+        lines = [f"*{icon} {source}* ({len(items)})"]
+        for it in items[:MAX_ITEMS_PER_CATEGORY]:
+            lines.append(f"• <{it.url}|{it.title}>")
+        if len(items) > MAX_ITEMS_PER_CATEGORY:
+            lines.append(f"_…và {len(items) - MAX_ITEMS_PER_CATEGORY} mục khác_")
+        blocks.append({"type": "section", "text": {"type": "mrkdwn", "text": "\n".join(lines)}})
+
+    blocks.append({
+        "type": "actions",
+        "elements": [{
+            "type": "button",
+            "style": "primary",
+            "text": {"type": "plain_text", "text": "📖 Đọc đầy đủ trên Tech Radar"},
+            "url": SITE_URL,
+        }],
+    })
 
     return {
         "text": f"{total} update mới hôm nay — {SITE_URL}",

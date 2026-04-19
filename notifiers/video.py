@@ -31,9 +31,9 @@ OUTPUT_DIR = Path(
 ).expanduser()
 
 W, H = 1080, 1920
-DURATION_MS = 45_000
-HOLD_MS = 4_000                       # hold at hook + outro
-SCROLL_MS = DURATION_MS - 2 * HOLD_MS  # 37s of scroll — slower, easier to read
+DURATION_MS = 30_000
+HOLD_MS = 2_000                       # hold at hook + outro
+SCROLL_MS = DURATION_MS - 2 * HOLD_MS  # 26s of scroll
 MAX_CARDS = 10                         # keep scroll comfortable
 
 SITE_URL = os.environ.get("TECH_RADAR_SITE_URL") or "hueanmy.github.io/tech-radar"
@@ -141,8 +141,10 @@ def _render_html(items: list[Item]) -> str:
       radial-gradient(ellipse 700px 400px at 100% 100%, rgba(236, 72, 153, 0.12), transparent);
   }}
 
-  .screen {{ width: {W}px; min-height: {H}px; padding: 120px 72px;
+  .screen {{ width: {W}px; padding: 60px 72px;
     display: flex; flex-direction: column; justify-content: center; }}
+  .screen.hook {{ min-height: 1200px; padding-top: 140px; padding-bottom: 40px; }}
+  .screen.outro {{ padding: 80px 72px 120px; }}
 
   /* ── Hook ────────────────────────────── */
   .hook {{ text-align: center; }}
@@ -170,17 +172,17 @@ def _render_html(items: list[Item]) -> str:
   }}
 
   /* ── Cards ───────────────────────────── */
-  .cards {{ padding: 100px 64px; display: flex; flex-direction: column; gap: 40px; }}
+  .cards {{ padding: 20px 64px 0; display: flex; flex-direction: column; gap: 24px; }}
   .card {{
     background: linear-gradient(180deg, #18181c 0%, #111114 100%);
     border: 1px solid #2d2d33;
-    border-radius: 32px; padding: 48px 52px;
+    border-radius: 32px; padding: 40px 48px;
     box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
-    min-height: 400px; display: flex; flex-direction: column;
+    display: flex; flex-direction: column;
   }}
   .card header {{
     display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }}
   .card .badge {{
     padding: 10px 22px; border-radius: 12px;
@@ -205,7 +207,7 @@ def _render_html(items: list[Item]) -> str:
   .small {{ margin-top: 20px; color: #a1a1aa; font-size: 30px; }}
 
   /* ── Outro ───────────────────────────── */
-  .outro {{ text-align: center; padding-top: 160px; padding-bottom: 200px; }}
+  .outro {{ text-align: center; }}
   .outro .hook-line {{
     font-size: 68px; font-weight: 900; line-height: 1.1;
     letter-spacing: -0.02em;
@@ -226,11 +228,24 @@ def _render_html(items: list[Item]) -> str:
     display: inline-block;
   }}
   .outro .follow {{
-    margin-top: 56px; font-size: 38px; font-weight: 600;
+    margin-top: 48px; font-size: 38px; font-weight: 600;
     color: #e4e4e7; letter-spacing: -0.005em;
   }}
-  .outro .arrow {{ font-size: 96px; margin-top: 32px; animation: bounce 1.2s infinite; }}
-  @keyframes bounce {{ 0%,100% {{transform: translateY(0);}} 50% {{transform: translateY(-20px);}} }}
+  .outro .follow-btn {{
+    display: inline-flex; align-items: center; gap: 20px;
+    margin-top: 40px;
+    padding: 28px 68px; border-radius: 999px;
+    background: linear-gradient(135deg, #ff2e63 0%, #fe5f75 100%);
+    color: #fff; font-size: 56px; font-weight: 900;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    box-shadow: 0 20px 60px -10px rgba(255, 46, 99, 0.55),
+                0 0 0 4px rgba(255, 46, 99, 0.15);
+    animation: pulse-btn 1.4s ease-in-out infinite;
+  }}
+  @keyframes pulse-btn {{
+    0%, 100% {{ transform: scale(1); }}
+    50% {{ transform: scale(1.06); }}
+  }}
 
 </style></head>
 <body>
@@ -250,7 +265,7 @@ def _render_html(items: list[Item]) -> str:
       <div class="cta-label">Truy cập ngay</div>
       <div class="cta-url">{escape(SITE_URL)}</div>
       <div class="follow">AI mạnh quá, theo dõi để không bỏ lỡ hàng ngày nha 🔥</div>
-      <div class="arrow">⬇️</div>
+      <div class="follow-btn">👉 Follow Me</div>
     </div>
   </section>
 </body></html>"""
@@ -286,7 +301,7 @@ _SCROLL_SCRIPT = f"""
   const SCROLL = {SCROLL_MS};
   const DURATION = {DURATION_MS};
   const distance = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  const ease = t => t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+  const ease = t => 1 - Math.pow(1 - t, 2);  // ease-out: snappy start, gentle finish
   const start = performance.now();
   function frame(now) {{
     const t = now - start;

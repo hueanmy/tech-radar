@@ -163,6 +163,28 @@ aside ul.nav-dates li a.current .badge {
   color: #fff;
 }
 
+.lang-dropdown {
+  position: relative; display: inline-flex; align-items: center;
+}
+.lang-dropdown::after {
+  content: "▾"; position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%); pointer-events: none;
+  color: var(--muted); font-size: 10px;
+}
+.lang-dropdown select {
+  appearance: none; -webkit-appearance: none;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 4px 28px 4px 14px; font: inherit;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+  cursor: pointer; transition: all 0.12s ease;
+}
+.lang-dropdown select:hover {
+  color: var(--text-strong); border-color: var(--accent-border);
+  background: var(--accent-soft);
+}
+.lang-dropdown select:focus { outline: none; border-color: var(--accent); }
+
 /* ── Main content ────────────────────────────────────── */
 main.content {
   padding: 40px 48px 80px;
@@ -188,6 +210,9 @@ main.content {
 @keyframes pulse {
   0%, 100% { box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15); }
   50% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0.05); }
+}
+.page-header .header-meta {
+  display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
 }
 .page-header .meta-badge {
   display: inline-flex; align-items: center; gap: 6px;
@@ -421,9 +446,22 @@ footer.page-footer a:hover { color: var(--accent); }
 """
 
 
-def _format_vn_day(d: date) -> str:
-    names = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"]
+_DAY_VI = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"]
+_DAY_EN = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+
+def _format_day(d: date, lang: str = "vi") -> str:
+    names = _DAY_EN if lang == "en" else _DAY_VI
     return f"{names[d.weekday()]} {d.day:02d}/{d.month:02d}"
+
+
+def _format_vn_day(d: date) -> str:  # kept for backwards compat
+    return _format_day(d, "vi")
+
+
+def _i18n(vi: str, en: str, tag: str = "span") -> str:
+    return (f'<{tag} class="i18n" data-vi="{escape(vi)}" '
+            f'data-en="{escape(en)}">{escape(vi)}</{tag}>')
 
 
 def _count_items(d: date) -> int:
@@ -443,16 +481,17 @@ def _render_sidebar(current_day: date, today: date, past: list[date]) -> str:
         is_current = d == current_day
         is_today = d == today
         href = "index.html" if is_today else f"{d.isoformat()}.html"
-        # When rendered inside archive/*.html, fix prefix
         if current_day != today:
             href = f"../index.html" if is_today else f"{d.isoformat()}.html"
-        label = "Hôm nay" if is_today else _format_vn_day(d)
+        if is_today:
+            label = _i18n("Hôm nay", "Today")
+        else:
+            label = _i18n(_format_day(d, "vi"), _format_day(d, "en"))
         count = _count_items(d)
         badge = f'<span class="badge">{count}</span>' if count else ""
         cls = "current" if is_current else ""
         items_html.append(
-            f'<li><a class="{cls}" href="{escape(href)}">'
-            f'<span>{escape(label)}</span>{badge}</a></li>'
+            f'<li><a class="{cls}" href="{escape(href)}">{label}{badge}</a></li>'
         )
     return f"""<aside class="sidebar">
   <div class="brand">
@@ -460,11 +499,13 @@ def _render_sidebar(current_day: date, today: date, past: list[date]) -> str:
       <div class="logo-mark"><img src="{AVATAR_URL}" alt="logo"></div>
       <div>
         <h1>Tech Radar</h1>
-        <p class="tagline">Daily · AI · Security</p>
+        <p class="tagline">{_i18n("Hằng ngày · AI · Bảo mật", "Daily · AI · Security")}</p>
       </div>
     </div>
   </div>
-  <div class="section-label">Lịch sử · {RETENTION_DAYS} ngày</div>
+  <div class="section-label">
+    {_i18n(f"Lịch sử · {RETENTION_DAYS} ngày", f"History · {RETENTION_DAYS} days")}
+  </div>
   <ul class="nav-dates">{"".join(items_html)}</ul>
 </aside>"""
 
@@ -473,17 +514,28 @@ def _render_video(current_day: date, today: date, item_count: int) -> str:
     video_file = VIDEO_DIR / f"{current_day.isoformat()}.mp4"
     if not video_file.exists():
         return ""
-    # Relative src from the page context
     src = f"videos/{current_day.isoformat()}.mp4" if current_day == today \
         else f"../videos/{current_day.isoformat()}.mp4"
-    label = "Tóm tắt trong 45 giây" if current_day == today else "Tóm tắt 45s"
-    date_label = "hôm nay" if current_day == today else _format_vn_day(current_day).lower()
+    if current_day == today:
+        label = _i18n("Tóm tắt trong 45 giây", "45-second digest", tag="h3")
+        desc_vi = f"{item_count} cập nhật hôm nay — click video để bật tiếng. Xem thêm trên kênh:"
+        desc_en = f"{item_count} updates today — tap video to unmute. Follow the channel for more:"
+    else:
+        label = _i18n("Tóm tắt 45s", "45s digest", tag="h3")
+        date_vi = _format_day(current_day, "vi").lower()
+        date_en = _format_day(current_day, "en").lower()
+        desc_vi = f"{item_count} cập nhật {date_vi} — click video để bật tiếng. Xem thêm trên kênh:"
+        desc_en = f"{item_count} updates {date_en} — tap video to unmute. Follow the channel for more:"
+
+    eyebrow = _i18n("● Tóm tắt mỗi ngày", "● Daily digest")
+    desc = _i18n(desc_vi, desc_en, tag="p")
+
     return f"""
 <section class="video-hero">
   <div class="video-body">
-    <div class="eyebrow">● Daily digest</div>
-    <h3>{label}</h3>
-    <p><strong>{item_count}</strong> cập nhật {date_label} — click video để bật tiếng. Xem thêm trên kênh:</p>
+    <div class="eyebrow">{eyebrow}</div>
+    {label}
+    {desc}
     <div class="socials">
       <a class="social youtube" href="{escape(YOUTUBE_URL)}" target="_blank" rel="noopener">
         <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg></span>
@@ -500,6 +552,26 @@ def _render_video(current_day: date, today: date, item_count: int) -> str:
            onclick="this.muted=!this.muted"></video>
   </div>
 </section>"""
+
+
+LANG_JS = """
+window.setLang = function(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.i18n').forEach(function(el){
+    var v = el.dataset[lang];
+    if (v != null) el.textContent = v;
+  });
+  var sel = document.querySelector('.lang-dropdown select');
+  if (sel && sel.value !== lang) sel.value = lang;
+  try { localStorage.setItem('lang', lang); } catch(e){}
+};
+(function(){
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch(e){}
+  var lang = saved || ((navigator.language || '').toLowerCase().indexOf('vi') === 0 ? 'vi' : 'en');
+  window.setLang(lang);
+})();
+"""
 
 
 def _render_page(current_day: date, today: date, past: list[date],
@@ -531,22 +603,29 @@ def _render_page(current_day: date, today: date, past: list[date],
     video_block = _render_video(current_day, today, len(items))
 
     if sections:
+        expand = _i18n("Mở tất cả", "Expand all")
+        collapse = _i18n("Đóng tất cả", "Collapse all")
         controls = (
             '<div class="controls">'
-            '<button onclick="document.querySelectorAll(\'details.group\').forEach(d=>d.open=true)">'
-            'Mở tất cả</button>'
-            '<button onclick="document.querySelectorAll(\'details.group\').forEach(d=>d.open=false)">'
-            'Đóng tất cả</button>'
+            f'<button onclick="document.querySelectorAll(\'details.group\').forEach(d=>d.open=true)">{expand}</button>'
+            f'<button onclick="document.querySelectorAll(\'details.group\').forEach(d=>d.open=false)">{collapse}</button>'
             '</div>'
         )
         body = controls + "".join(sections)
     else:
         body = ('<div class="empty"><span class="emoji">🌙</span>'
-                'Chưa có item nào trong ngày này.'
-                '<div class="hint">Ghé lại sau khi radar chạy tiếp.</div></div>')
+                f'{_i18n("Chưa có item nào trong ngày này.", "No items yet for this day.")}'
+                f'<div class="hint">{_i18n("Ghé lại sau khi radar chạy tiếp.", "Check back after the next radar run.")}</div></div>')
 
     sidebar = _render_sidebar(current_day, today, past)
     right_rail = f'<aside class="right-rail">{video_block}</aside>' if video_block else ""
+
+    built_at = datetime.now().strftime("%Y-%m-%d %H:%M")
+    built_label = _i18n(f"Tech Radar · build lúc {built_at}",
+                        f"Tech Radar · built {built_at}")
+    source_link = _i18n("nguồn ↗", "source ↗")
+    live_label = _i18n(f"● Live · {datetime.now():%H:%M}",
+                       f"● Live · {datetime.now():%H:%M}")
 
     return f"""<!doctype html>
 <html lang="vi">
@@ -556,7 +635,7 @@ def _render_page(current_day: date, today: date, past: list[date],
 <meta http-equiv="cache-control" content="no-cache, must-revalidate">
 <link rel="icon" type="image/png" href="{AVATAR_URL}">
 <link rel="apple-touch-icon" href="{AVATAR_URL}">
-<title>{escape(title)} — Tech Radar</title>
+<title>Tech Radar</title>
 <style>{CSS}</style>
 </head>
 <body>
@@ -564,18 +643,27 @@ def _render_page(current_day: date, today: date, past: list[date],
 {sidebar}
 <main class="content">
   <div class="page-header">
-    <h2>{"<span class='pulse'></span>" if current_day == today else ""}<span>{escape(title)}</span></h2>
-    <div class="meta-badge">● Live · {datetime.now():%H:%M}</div>
+    <h2>{"<span class='pulse'></span>" if current_day == today else ""}{title}</h2>
+    <div class="header-meta">
+      <div class="meta-badge">{live_label}</div>
+      <label class="lang-dropdown" aria-label="Language">
+        <select onchange="setLang(this.value)">
+          <option value="vi">🇻🇳 VI</option>
+          <option value="en">🇺🇸 EN</option>
+        </select>
+      </label>
+    </div>
   </div>
   <div class="subtitle">{subtitle}</div>
   {body}
   <footer class="page-footer">
-    <span>Tech Radar · built {datetime.now():%Y-%m-%d %H:%M}</span>
-    <a href="https://github.com/hueanmy/tech-radar" target="_blank">source ↗</a>
+    <span>{built_label}</span>
+    <a href="https://github.com/hueanmy/tech-radar" target="_blank">{source_link}</a>
   </footer>
 </main>
 {right_rail}
 </div>
+<script>{LANG_JS}</script>
 </body>
 </html>"""
 
@@ -650,20 +738,27 @@ def build_site(today_items: list[Item]) -> Path:
         day_items = _load_day(d)
         if not day_items:
             continue
+        title = _i18n(_format_day(d, "vi"), _format_day(d, "en"))
+        subtitle = (f"<strong>{len(day_items)}</strong> "
+                    f"{_i18n(f'item · {d.isoformat()}', f'items · {d.isoformat()}')}")
         html = _render_page(
             current_day=d, today=today, past=past,
             items=day_items,
-            title=f"{_format_vn_day(d)}",
-            subtitle=f"<strong>{len(day_items)}</strong> item · {d.isoformat()}",
+            title=title,
+            subtitle=subtitle,
         )
         (ARCHIVE_DIR / f"{d.isoformat()}.html").write_text(html)
 
     index_items = _load_day(today)
+    now_hm = datetime.now().strftime("%H:%M")
+    title = _i18n("Hôm nay", "Today")
+    subtitle = (f"<strong>{len(index_items)}</strong> "
+                f"{_i18n(f'item · {today.isoformat()} · cập nhật {now_hm}', f'items · {today.isoformat()} · updated {now_hm}')}")
     index_html = _render_page(
         current_day=today, today=today, past=past,
         items=index_items,
-        title="Hôm nay",
-        subtitle=f"<strong>{len(index_items)}</strong> item · {today.isoformat()} · cập nhật {datetime.now():%H:%M}",
+        title=title,
+        subtitle=subtitle,
     )
     index_path = SITE_DIR / "index.html"
     index_path.write_text(index_html)

@@ -8,6 +8,7 @@ Output structure (under ~/.tech-radar/site/):
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from dataclasses import asdict
@@ -27,6 +28,8 @@ VIDEO_DIR = SITE_DIR / "videos"
 
 RETENTION_DAYS = 14
 AVATAR_URL = "https://github.com/hueanmy.png"
+YOUTUBE_URL = os.environ.get("TECH_RADAR_YOUTUBE_URL", "https://www.youtube.com/@hueanmy")
+TIKTOK_URL = os.environ.get("TECH_RADAR_TIKTOK_URL", "https://www.tiktok.com/@hueanmy")
 
 ICONS = {
     "Events": "📅",
@@ -87,7 +90,7 @@ a { color: inherit; text-decoration: none; }
 
 .layout {
   display: grid;
-  grid-template-columns: 272px minmax(0, 1fr);
+  grid-template-columns: 272px minmax(0, 1fr) 340px;
   min-height: 100vh;
 }
 
@@ -217,22 +220,24 @@ main.content {
   background: var(--surface-2);
 }
 
-/* ── Video hero ───────────────────────────────────────── */
+/* ── Right rail (video) ──────────────────────────────── */
+aside.right-rail {
+  padding: 40px 28px 40px 0;
+  position: sticky; top: 0; align-self: start;
+  max-height: 100vh; overflow: visible;
+}
 .video-hero {
   position: relative;
-  margin: 0 0 28px;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow), 0 0 60px -20px rgba(167, 139, 250, 0.25);
-  display: flex;
-  align-items: center;
-  gap: 0;
+  box-shadow: var(--shadow), 0 0 60px -20px rgba(167, 139, 250, 0.3);
+  display: flex; flex-direction: column;
 }
 .video-hero .video-wrap {
   position: relative;
-  width: 240px; flex-shrink: 0;
+  width: 100%;
   aspect-ratio: 9 / 16;
   background: #000;
 }
@@ -241,12 +246,10 @@ main.content {
   display: block; object-fit: cover;
   cursor: pointer;
 }
-.video-hero .video-body {
-  flex: 1; padding: 20px 24px; min-width: 0;
-}
+.video-hero .video-body { padding: 16px 18px 18px; }
 .video-hero .eyebrow {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600;
+  font-size: 10.5px; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 8px;
 }
@@ -257,32 +260,35 @@ main.content {
   animation: pulse 2s ease-in-out infinite;
 }
 .video-hero h3 {
-  margin: 0 0 6px; font-size: 17px; font-weight: 700;
+  margin: 0 0 6px; font-size: 15px; font-weight: 700;
   color: var(--text-strong); letter-spacing: -0.01em;
 }
 .video-hero p {
-  margin: 0 0 14px; font-size: 13px; color: var(--muted-2); line-height: 1.5;
+  margin: 0 0 14px; font-size: 12.5px; color: var(--muted-2); line-height: 1.5;
 }
-.video-hero .video-actions {
-  display: flex; gap: 8px; flex-wrap: wrap;
+.video-hero .socials {
+  display: flex; gap: 8px;
 }
-.video-hero .btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 13px; border-radius: 8px;
-  font-size: 12.5px; font-weight: 500;
-  background: var(--surface-2); color: var(--muted-2);
+.video-hero .social {
+  flex: 1;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 9px 10px; border-radius: 10px;
+  font-size: 12.5px; font-weight: 600;
+  background: var(--surface-2); color: var(--text);
   border: 1px solid var(--border);
-  transition: all 0.12s ease;
+  transition: all 0.15s ease;
 }
-.video-hero .btn:hover {
-  color: var(--text-strong); border-color: var(--accent-border);
-  background: var(--accent-soft);
+.video-hero .social:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
 }
-.video-hero .btn.primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #fff; border-color: transparent;
+.video-hero .social .ico {
+  width: 16px; height: 16px; display: grid; place-items: center;
+  flex-shrink: 0;
 }
-.video-hero .btn.primary:hover { opacity: 0.92; }
+.video-hero .social.youtube:hover { border-color: #ff4444; background: rgba(255, 68, 68, 0.08); color: #fff; }
+.video-hero .social.youtube .ico { color: #ff4444; }
+.video-hero .social.tiktok:hover { background: rgba(250, 250, 250, 0.06); border-color: var(--text); color: #fff; }
 
 /* ── Groups ───────────────────────────────────────────── */
 details.group {
@@ -380,8 +386,18 @@ footer.page-footer a { color: var(--muted-2); }
 footer.page-footer a:hover { color: var(--accent); }
 
 /* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .layout { grid-template-columns: 272px minmax(0, 1fr); }
+  aside.right-rail {
+    grid-column: 1 / -1; grid-row: 2;
+    position: static; max-height: none;
+    padding: 0 48px 24px 48px;
+  }
+  .video-hero { max-width: 360px; margin: 0 auto; }
+}
 @media (max-width: 820px) {
   .layout { grid-template-columns: 1fr; }
+  aside.right-rail { padding: 0 20px 24px; grid-row: auto; }
   aside.sidebar {
     position: static; max-height: none; padding: 16px 0 14px;
     border-right: 0; border-bottom: 1px solid var(--border);
@@ -400,9 +416,7 @@ footer.page-footer a:hover { color: var(--accent); }
   aside ul.nav-dates li a.current { box-shadow: none; border-color: var(--accent-border); }
   main.content { padding: 28px 20px 60px; }
   .page-header h2 { font-size: 24px; }
-  .video-hero { flex-direction: column; }
-  .video-hero .video-wrap { width: 100%; aspect-ratio: 9 / 12; }
-  .video-hero .video-body { padding: 18px 18px 20px; }
+  .video-hero { max-width: 100%; }
 }
 """
 
@@ -466,18 +480,24 @@ def _render_video(current_day: date, today: date, item_count: int) -> str:
     date_label = "hôm nay" if current_day == today else _format_vn_day(current_day).lower()
     return f"""
 <section class="video-hero">
-  <div class="video-wrap">
-    <video src="{escape(src)}" autoplay muted loop playsinline preload="metadata"
-           onclick="this.muted=!this.muted"></video>
-  </div>
   <div class="video-body">
     <div class="eyebrow">● Daily digest</div>
     <h3>{label}</h3>
-    <p><strong>{item_count}</strong> cập nhật {date_label} — click video để bật tiếng, hoặc tải xuống để xem full.</p>
-    <div class="video-actions">
-      <a class="btn primary" href="{escape(src)}" download>⬇ Tải MP4</a>
-      <a class="btn" href="{escape(src)}" target="_blank">Mở full</a>
+    <p><strong>{item_count}</strong> cập nhật {date_label} — click video để bật tiếng. Xem thêm trên kênh:</p>
+    <div class="socials">
+      <a class="social youtube" href="{escape(YOUTUBE_URL)}" target="_blank" rel="noopener">
+        <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg></span>
+        YouTube
+      </a>
+      <a class="social tiktok" href="{escape(TIKTOK_URL)}" target="_blank" rel="noopener">
+        <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.8 5.8 0 0 1-3.4-1.1 5.8 5.8 0 0 1-2.3-3.9h-3.7v13.1a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .7.1V8.6a6.4 6.4 0 0 0-.7 0 6.4 6.4 0 1 0 6.4 6.4V8.5a9.3 9.3 0 0 0 5.4 1.7V6.5a5.5 5.5 0 0 1-.1.3Z"/></svg></span>
+        TikTok
+      </a>
     </div>
+  </div>
+  <div class="video-wrap">
+    <video src="{escape(src)}" autoplay muted loop playsinline preload="metadata"
+           onclick="this.muted=!this.muted"></video>
   </div>
 </section>"""
 
@@ -519,13 +539,14 @@ def _render_page(current_day: date, today: date, past: list[date],
             'Đóng tất cả</button>'
             '</div>'
         )
-        body = video_block + controls + "".join(sections)
+        body = controls + "".join(sections)
     else:
-        body = video_block + ('<div class="empty"><span class="emoji">🌙</span>'
+        body = ('<div class="empty"><span class="emoji">🌙</span>'
                 'Chưa có item nào trong ngày này.'
                 '<div class="hint">Ghé lại sau khi radar chạy tiếp.</div></div>')
 
     sidebar = _render_sidebar(current_day, today, past)
+    right_rail = f'<aside class="right-rail">{video_block}</aside>' if video_block else ""
 
     return f"""<!doctype html>
 <html lang="vi">
@@ -553,6 +574,7 @@ def _render_page(current_day: date, today: date, past: list[date],
     <a href="https://github.com/hueanmy/tech-radar" target="_blank">source ↗</a>
   </footer>
 </main>
+{right_rail}
 </div>
 </body>
 </html>"""
@@ -653,6 +675,9 @@ def build_site(today_items: list[Item]) -> Path:
 
 def _git_sync() -> None:
     """Commit docs/ + push to GitHub Pages repo. No-op if not a git repo."""
+    if os.environ.get("TECH_RADAR_NO_PUSH"):
+        log("  ⊘ Git sync skipped (TECH_RADAR_NO_PUSH set)")
+        return
     if not (REPO_DIR / ".git").exists():
         return
     try:

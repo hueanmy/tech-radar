@@ -23,6 +23,7 @@ REPO_DIR = Path(__file__).resolve().parent.parent
 SITE_DIR = REPO_DIR / "docs"
 DATA_DIR = SITE_DIR / "data"
 ARCHIVE_DIR = SITE_DIR / "archive"
+VIDEO_DIR = SITE_DIR / "videos"
 
 RETENTION_DAYS = 14
 AVATAR_URL = "https://github.com/hueanmy.png"
@@ -216,6 +217,73 @@ main.content {
   background: var(--surface-2);
 }
 
+/* ── Video hero ───────────────────────────────────────── */
+.video-hero {
+  position: relative;
+  margin: 0 0 28px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow), 0 0 60px -20px rgba(167, 139, 250, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.video-hero .video-wrap {
+  position: relative;
+  width: 240px; flex-shrink: 0;
+  aspect-ratio: 9 / 16;
+  background: #000;
+}
+.video-hero video {
+  width: 100%; height: 100%;
+  display: block; object-fit: cover;
+  cursor: pointer;
+}
+.video-hero .video-body {
+  flex: 1; padding: 20px 24px; min-width: 0;
+}
+.video-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+.video-hero .eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--danger);
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+.video-hero h3 {
+  margin: 0 0 6px; font-size: 17px; font-weight: 700;
+  color: var(--text-strong); letter-spacing: -0.01em;
+}
+.video-hero p {
+  margin: 0 0 14px; font-size: 13px; color: var(--muted-2); line-height: 1.5;
+}
+.video-hero .video-actions {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.video-hero .btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 13px; border-radius: 8px;
+  font-size: 12.5px; font-weight: 500;
+  background: var(--surface-2); color: var(--muted-2);
+  border: 1px solid var(--border);
+  transition: all 0.12s ease;
+}
+.video-hero .btn:hover {
+  color: var(--text-strong); border-color: var(--accent-border);
+  background: var(--accent-soft);
+}
+.video-hero .btn.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff; border-color: transparent;
+}
+.video-hero .btn.primary:hover { opacity: 0.92; }
+
 /* ── Groups ───────────────────────────────────────────── */
 details.group {
   margin-bottom: 10px;
@@ -332,6 +400,9 @@ footer.page-footer a:hover { color: var(--accent); }
   aside ul.nav-dates li a.current { box-shadow: none; border-color: var(--accent-border); }
   main.content { padding: 28px 20px 60px; }
   .page-header h2 { font-size: 24px; }
+  .video-hero { flex-direction: column; }
+  .video-hero .video-wrap { width: 100%; aspect-ratio: 9 / 12; }
+  .video-hero .video-body { padding: 18px 18px 20px; }
 }
 """
 
@@ -384,6 +455,33 @@ def _render_sidebar(current_day: date, today: date, past: list[date]) -> str:
 </aside>"""
 
 
+def _render_video(current_day: date, today: date, item_count: int) -> str:
+    video_file = VIDEO_DIR / f"{current_day.isoformat()}.mp4"
+    if not video_file.exists():
+        return ""
+    # Relative src from the page context
+    src = f"videos/{current_day.isoformat()}.mp4" if current_day == today \
+        else f"../videos/{current_day.isoformat()}.mp4"
+    label = "Tóm tắt trong 45 giây" if current_day == today else "Tóm tắt 45s"
+    date_label = "hôm nay" if current_day == today else _format_vn_day(current_day).lower()
+    return f"""
+<section class="video-hero">
+  <div class="video-wrap">
+    <video src="{escape(src)}" autoplay muted loop playsinline preload="metadata"
+           onclick="this.muted=!this.muted"></video>
+  </div>
+  <div class="video-body">
+    <div class="eyebrow">● Daily digest</div>
+    <h3>{label}</h3>
+    <p><strong>{item_count}</strong> cập nhật {date_label} — click video để bật tiếng, hoặc tải xuống để xem full.</p>
+    <div class="video-actions">
+      <a class="btn primary" href="{escape(src)}" download>⬇ Tải MP4</a>
+      <a class="btn" href="{escape(src)}" target="_blank">Mở full</a>
+    </div>
+  </div>
+</section>"""
+
+
 def _render_page(current_day: date, today: date, past: list[date],
                  items: list[Item], title: str, subtitle: str) -> str:
     by_source: dict[str, list[Item]] = {}
@@ -410,6 +508,8 @@ def _render_page(current_day: date, today: date, past: list[date],
             f'<ul class="items">{"".join(lis)}</ul></details>'
         )
 
+    video_block = _render_video(current_day, today, len(items))
+
     if sections:
         controls = (
             '<div class="controls">'
@@ -419,9 +519,9 @@ def _render_page(current_day: date, today: date, past: list[date],
             'Đóng tất cả</button>'
             '</div>'
         )
-        body = controls + "".join(sections)
+        body = video_block + controls + "".join(sections)
     else:
-        body = ('<div class="empty"><span class="emoji">🌙</span>'
+        body = video_block + ('<div class="empty"><span class="emoji">🌙</span>'
                 'Chưa có item nào trong ngày này.'
                 '<div class="hint">Ghé lại sau khi radar chạy tiếp.</div></div>')
 
@@ -500,12 +600,13 @@ def _archive_days(exclude: date) -> list[date]:
 
 
 def _cleanup_old(today: date, past: list[date]) -> list[date]:
-    """Delete data + archive files older than RETENTION_DAYS. Return kept past days."""
+    """Delete data + archive + video files older than RETENTION_DAYS. Return kept past days."""
     keep = past[:RETENTION_DAYS]
     drop = past[RETENTION_DAYS:]
     for d in drop:
         (DATA_DIR / f"{d.isoformat()}.json").unlink(missing_ok=True)
         (ARCHIVE_DIR / f"{d.isoformat()}.html").unlink(missing_ok=True)
+        (VIDEO_DIR / f"{d.isoformat()}.mp4").unlink(missing_ok=True)
     if drop:
         log(f"  ✓ Retention: dropped {len(drop)} day(s) older than {RETENTION_DAYS}d")
     return keep

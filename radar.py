@@ -161,6 +161,12 @@ def main() -> int:
             print_terminal(new_items)
             return 2
 
+        from notifiers.video import build_video
+        try:
+            build_video(new_items)
+        except Exception as e:
+            log(f"  ✗ Video build failed: {e}")
+
         from notifiers.site import build_site
         try:
             build_site(new_items)

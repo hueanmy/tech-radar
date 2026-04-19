@@ -481,5 +481,89 @@
     "url": "https://projectzero.google/2026/01/sound-barrier-2.html",
     "published": "2026-01-30T00:00:00-08:00",
     "summary": "7Ccrk++Q2t2332PLOsGCoR61o06Dsin/I3hc0PxviRLyBuBnrJ3DnPiAU488aSYSo2LIx+qODBJnAYG7dNarr5ne47fO/nkmJFfhD4ZnYEnQTivO030QIvTstcccaQYVxgf0tKRwpXsMN130necWO655w8xUwuCMPwFNFCfqeMA0MVpBb/nTArG3fyPaXQd/AT8gRhkJ"
+  },
+  {
+    "source": "Security",
+    "title": "Chrome 0-day khai thác, Google phát hành bản vá khẩn",
+    "url": "https://example.com/1",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Security",
+    "title": "Ransomware mới nhắm vào ESXi",
+    "url": "https://example.com/2",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Security",
+    "title": "CISA cảnh báo lỗ hổng Cisco IOS XE",
+    "url": "https://example.com/3",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Security",
+    "title": "APT Trung Quốc tấn công nhà mạng Đông Nam Á",
+    "url": "https://example.com/4",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Anthropic News",
+    "title": "Claude 4.7 Opus ra mắt với reasoning đột phá",
+    "url": "https://example.com/5",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Claude Code Changelog",
+    "title": "Claude Code 2.5 thêm hooks động",
+    "url": "https://example.com/6",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "AI YouTube",
+    "title": "Fireship: 10 AI agent framework 2026",
+    "url": "https://example.com/7",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "anthropics/claude-agent-sdk 50k stars",
+    "url": "https://example.com/8",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Electron",
+    "title": "Electron 35 tối ưu memory 40%",
+    "url": "https://example.com/9",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Apple/iOS",
+    "title": "iOS 19 beta Apple Intelligence on-device",
+    "url": "https://example.com/10",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Playwright",
+    "title": "Playwright 1.60 trace viewer AI-powered",
+    "url": "https://example.com/11",
+    "published": "2026-04-20",
+    "summary": ""
+  },
+  {
+    "source": "Engineering Blog",
+    "title": "Scaling Claude: inference architecture",
+    "url": "https://example.com/12",
+    "published": "2026-04-20",
+    "summary": ""
   }
 ]

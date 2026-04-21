@@ -1,0 +1,37 @@
+[
+  {
+    "source": "Security",
+    "title": "[The Hacker News] SGLang CVE-2026-5760 (CVSS 9.8) Enables RCE via Malicious GGUF Model Files",
+    "url": "https://thehackernews.com/2026/04/sglang-cve-2026-5760-cvss-98-enables.html",
+    "published": "Mon, 20 Apr 2026 22:44:00 +0530",
+    "summary": "A critical security vulnerability has been disclosed in SGLang that, if successfully exploited, could result in remote code execution on susceptible systems.\nThe vulnerability, tracked as CVE-2026-576"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] KelpDAO suffers $290 million heist tied to Lazarus hackers",
+    "url": "https://www.bleepingcomputer.com/news/security/kelpdao-suffers-290-million-heist-tied-to-lazarus-hackers/",
+    "published": "Mon, 20 Apr 2026 18:23:52 -0400",
+    "summary": "State-sponsored North Korean hackers are likely behind the $290 million crypto-heist that impacted the KelpDAO DeFi project on Saturday. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] China's Apple App Store infiltrated by crypto-stealing wallet apps",
+    "url": "https://www.bleepingcomputer.com/news/security/chinas-apple-app-store-infiltrated-by-crypto-stealing-wallet-apps/",
+    "published": "Mon, 20 Apr 2026 17:52:54 -0400",
+    "summary": "A set of 26 malicious apps on Apple App Store impersonate popular wallets, such as Metamask, Coinbase, Trust Wallet, and OneKey, to steal recovery or seed phrases and drain them of cryptocurrency asse"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] The Gentlemen ransomware now uses SystemBC for bot-powered attacks",
+    "url": "https://www.bleepingcomputer.com/news/security/the-gentlemen-ransomware-now-uses-systembc-for-bot-powered-attacks/",
+    "published": "Mon, 20 Apr 2026 16:02:37 -0400",
+    "summary": "A SystemBC proxy malware botnet of more than 1,570 hosts, believed to be corporate victims, has been discovered following an investigation into a Gentlemen ransomware attack carried out by a gang affi"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Seiko USA website defaced as hacker claims customer data theft",
+    "url": "https://www.bleepingcomputer.com/news/security/seiko-usa-website-defaced-as-hacker-claims-customer-data-theft/",
+    "published": "Mon, 20 Apr 2026 14:22:31 -0400",
+    "summary": "The Seiko USA website was defaced over the weekend, displaying a message from attackers claiming they stole its Shopify customer database and threatening to leak it unless a ransom is paid. [...]"
+  }
+]

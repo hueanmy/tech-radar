@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<link rel="icon" type="image/png" href="https://github.com/hueanmy.png">
+<link rel="apple-touch-icon" href="https://github.com/hueanmy.png">
+<title>Tech Radar</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #09090b;
+  --bg-subtle: #0c0c0f;
+  --surface: #111114;
+  --surface-2: #18181c;
+  --surface-3: #202024;
+  --border: #1f1f24;
+  --border-strong: #2d2d33;
+  --text: #e4e4e7;
+  --text-strong: #fafafa;
+  --muted: #71717a;
+  --muted-2: #a1a1aa;
+  --accent: #a78bfa;
+  --accent-2: #818cf8;
+  --accent-soft: rgba(167, 139, 250, 0.12);
+  --accent-border: rgba(167, 139, 250, 0.3);
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.4);
+  --glow: 0 0 40px -10px rgba(167, 139, 250, 0.25);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(ellipse 800px 400px at 50% -100px, rgba(167, 139, 250, 0.08), transparent),
+    radial-gradient(ellipse 600px 300px at 100% 400px, rgba(129, 140, 248, 0.05), transparent);
+  background-attachment: fixed;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent-soft); color: var(--text-strong); }
+
+.layout {
+  display: grid;
+  grid-template-columns: 272px minmax(0, 1fr) 340px;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────── */
+aside.sidebar {
+  background: var(--bg-subtle);
+  border-right: 1px solid var(--border);
+  padding: 24px 0 16px;
+  position: sticky; top: 0; align-self: start;
+  max-height: 100vh; overflow-y: auto;
+  backdrop-filter: blur(8px);
+}
+aside.sidebar::-webkit-scrollbar { width: 4px; }
+aside.sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+aside .brand {
+  padding: 0 20px 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+aside .brand-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+aside .brand-logo .logo-mark {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  padding: 2px; display: grid; place-items: center;
+  box-shadow: var(--glow);
+}
+aside .brand-logo .logo-mark img {
+  width: 100%; height: 100%; border-radius: 50%;
+  display: block; background: var(--bg);
+}
+aside .brand h1 {
+  margin: 0; font-size: 15px; font-weight: 600;
+  letter-spacing: -0.015em; color: var(--text-strong);
+}
+aside .brand .tagline {
+  margin: 2px 0 0; font-size: 11px; color: var(--muted);
+  letter-spacing: 0.01em;
+}
+aside .section-label {
+  padding: 0 20px 10px; font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted); font-weight: 600;
+}
+aside ul.nav-dates {
+  list-style: none; padding: 0 10px; margin: 0;
+}
+aside ul.nav-dates li { margin: 1px 0; }
+aside ul.nav-dates li a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 12px; font-size: 13px; color: var(--muted-2);
+  border-radius: 7px; transition: all 0.12s ease;
+  font-weight: 500;
+}
+aside ul.nav-dates li a:hover {
+  background: var(--surface-2); color: var(--text-strong);
+}
+aside ul.nav-dates li a.current {
+  background: var(--accent-soft); color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-border);
+}
+aside ul.nav-dates li a .badge {
+  background: var(--surface-2); color: var(--muted);
+  font-size: 10.5px; padding: 1px 7px; border-radius: 10px;
+  font-weight: 600; min-width: 24px; text-align: center;
+}
+aside ul.nav-dates li a.current .badge {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+}
+
+.lang-dropdown {
+  position: relative; display: inline-flex; align-items: center;
+}
+.lang-dropdown::after {
+  content: "▾"; position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%); pointer-events: none;
+  color: var(--muted); font-size: 10px;
+}
+.lang-dropdown select {
+  appearance: none; -webkit-appearance: none;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 4px 28px 4px 14px; font: inherit;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+  cursor: pointer; transition: all 0.12s ease;
+}
+.lang-dropdown select:hover {
+  color: var(--text-strong); border-color: var(--accent-border);
+  background: var(--accent-soft);
+}
+.lang-dropdown select:focus { outline: none; border-color: var(--accent); }
+
+/* ── Main content ────────────────────────────────────── */
+main.content {
+  padding: 40px 48px 80px;
+  max-width: 920px;
+  width: 100%;
+}
+
+.page-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 6px;
+}
+.page-header h2 {
+  margin: 0; font-size: 30px; font-weight: 700;
+  letter-spacing: -0.025em; color: var(--text-strong);
+  display: flex; align-items: center; gap: 12px;
+}
+.page-header h2 .pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15); }
+  50% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0.05); }
+}
+.page-header .header-meta {
+  display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.page-header .meta-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  background: var(--surface-2); color: var(--muted-2);
+  font-size: 12px; font-weight: 500;
+  border: 1px solid var(--border);
+}
+.subtitle {
+  color: var(--muted-2); font-size: 14px;
+  margin: 8px 0 28px; padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.subtitle strong { color: var(--text-strong); font-weight: 600; }
+
+/* Controls */
+.controls {
+  margin-bottom: 20px; display: flex; gap: 8px;
+}
+.controls button {
+  background: var(--surface); color: var(--muted-2);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 14px; cursor: pointer;
+  font: inherit; font-size: 12.5px; font-weight: 500;
+  transition: all 0.12s ease;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.controls button:hover {
+  color: var(--text-strong); border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+
+/* ── Right rail (video) ──────────────────────────────── */
+aside.right-rail {
+  padding: 40px 28px 40px 0;
+  position: sticky; top: 0; align-self: start;
+  max-height: 100vh; overflow: visible;
+}
+.video-hero {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow), 0 0 60px -20px rgba(167, 139, 250, 0.3);
+  display: flex; flex-direction: column;
+}
+.video-hero .video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #000;
+}
+.video-hero video {
+  width: 100%; height: 100%;
+  display: block; object-fit: cover;
+  cursor: pointer;
+}
+.video-hero .video-body { padding: 16px 18px 18px; }
+.video-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+.video-hero .eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--danger);
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+.video-hero h3 {
+  margin: 0 0 6px; font-size: 15px; font-weight: 700;
+  color: var(--text-strong); letter-spacing: -0.01em;
+}
+.video-hero p {
+  margin: 0 0 14px; font-size: 12.5px; color: var(--muted-2); line-height: 1.5;
+}
+.video-hero .socials {
+  display: flex; gap: 8px;
+}
+.video-hero .social {
+  flex: 1;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 9px 10px; border-radius: 10px;
+  font-size: 12.5px; font-weight: 600;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border);
+  transition: all 0.15s ease;
+}
+.video-hero .social:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+.video-hero .social .ico {
+  width: 16px; height: 16px; display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.video-hero .social.youtube:hover { border-color: #ff4444; background: rgba(255, 68, 68, 0.08); color: #fff; }
+.video-hero .social.youtube .ico { color: #ff4444; }
+.video-hero .social.tiktok:hover { background: rgba(250, 250, 250, 0.06); border-color: var(--text); color: #fff; }
+
+/* ── Groups ───────────────────────────────────────────── */
+details.group {
+  margin-bottom: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.2s ease;
+}
+details.group:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
+}
+details.group[open] {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+details.group summary {
+  cursor: pointer; padding: 14px 18px;
+  display: flex; gap: 12px; align-items: center;
+  list-style: none; user-select: none;
+  transition: background 0.12s ease;
+}
+details.group summary:hover { background: var(--surface-2); }
+details.group summary::-webkit-details-marker { display: none; }
+details.group summary::before {
+  content: ""; width: 6px; height: 6px;
+  border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted);
+  transform: rotate(-45deg); margin-left: 2px;
+  transition: transform 0.15s ease;
+}
+details.group[open] summary::before { transform: rotate(45deg); }
+
+details.group .source-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--surface-3);
+  display: grid; place-items: center;
+  font-size: 15px; flex-shrink: 0;
+}
+details.group .source-name {
+  font-size: 14.5px; font-weight: 600; color: var(--text-strong);
+  letter-spacing: -0.005em;
+}
+details.group .count {
+  margin-left: auto;
+  background: var(--surface-2); color: var(--muted-2);
+  font-size: 11.5px; font-weight: 600;
+  padding: 3px 9px; border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+ul.items { list-style: none; padding: 4px 18px 14px; margin: 0; }
+ul.items li {
+  padding: 11px 0;
+  border-top: 1px solid var(--border);
+  transition: opacity 0.12s ease;
+}
+ul.items li:first-child { border-top: 0; }
+ul.items a.title {
+  color: var(--text); font-weight: 500; line-height: 1.45;
+  font-size: 14px;
+  display: block;
+  transition: color 0.12s ease;
+}
+ul.items a.title:hover { color: var(--accent); }
+ul.items .date {
+  color: var(--muted); font-size: 11.5px; margin-top: 4px;
+  display: flex; align-items: center; gap: 6px;
+}
+ul.items .date::before {
+  content: ""; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--muted); display: inline-block;
+}
+
+.empty {
+  color: var(--muted-2); text-align: center; padding: 100px 20px;
+  font-size: 14px;
+}
+.empty .emoji {
+  font-size: 48px; display: block; margin-bottom: 14px;
+  opacity: 0.6;
+}
+.empty .hint { color: var(--muted); font-size: 12.5px; margin-top: 6px; }
+
+footer.page-footer {
+  color: var(--muted); font-size: 11.5px;
+  margin-top: 56px; padding-top: 18px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+}
+footer.page-footer a { color: var(--muted-2); }
+footer.page-footer a:hover { color: var(--accent); }
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .layout { grid-template-columns: 272px minmax(0, 1fr); }
+  aside.right-rail {
+    grid-column: 1 / -1; grid-row: 2;
+    position: static; max-height: none;
+    padding: 0 48px 24px 48px;
+  }
+  .video-hero { max-width: 360px; margin: 0 auto; }
+}
+@media (max-width: 820px) {
+  .layout { grid-template-columns: 1fr; }
+  aside.right-rail { padding: 0 20px 24px; grid-row: auto; }
+  aside.sidebar {
+    position: static; max-height: none; padding: 16px 0 14px;
+    border-right: 0; border-bottom: 1px solid var(--border);
+  }
+  aside .brand { border-bottom: 0; padding-bottom: 12px; margin-bottom: 10px; }
+  aside .section-label { padding: 0 16px 6px; }
+  aside ul.nav-dates {
+    display: flex; overflow-x: auto; padding: 0 12px 4px; gap: 6px;
+    scrollbar-width: none;
+  }
+  aside ul.nav-dates::-webkit-scrollbar { display: none; }
+  aside ul.nav-dates li a {
+    border: 1px solid var(--border);
+    padding: 6px 12px; white-space: nowrap;
+  }
+  aside ul.nav-dates li a.current { box-shadow: none; border-color: var(--accent-border); }
+  main.content { padding: 28px 20px 60px; }
+  .page-header h2 { font-size: 24px; }
+  .video-hero { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-logo">
+      <div class="logo-mark"><img src="https://github.com/hueanmy.png" alt="logo"></div>
+      <div>
+        <h1>Tech Radar</h1>
+        <p class="tagline"><span class="i18n" data-vi="Hằng ngày · AI · Bảo mật" data-en="Daily · AI · Security">Hằng ngày · AI · Bảo mật</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="section-label">
+    <span class="i18n" data-vi="Lịch sử · 14 ngày" data-en="History · 14 days">Lịch sử · 14 ngày</span>
+  </div>
+  <ul class="nav-dates"><li><a class="" href="../index.html"><span class="i18n" data-vi="Hôm nay" data-en="Today">Hôm nay</span><span class="badge">5</span></a></li><li><a class="current" href="2026-04-20.html"><span class="i18n" data-vi="T2 20/04" data-en="Mon 20/04">T2 20/04</span><span class="badge">69</span></a></li></ul>
+</aside>
+<main class="content">
+  <div class="page-header">
+    <h2><span class="i18n" data-vi="T2 20/04" data-en="Mon 20/04">T2 20/04</span></h2>
+    <div class="header-meta">
+      <div class="meta-badge"><span class="i18n" data-vi="● Live · 07:10" data-en="● Live · 07:10">● Live · 07:10</span></div>
+      <label class="lang-dropdown" aria-label="Language">
+        <select onchange="setLang(this.value)">
+          <option value="vi">🇻🇳 VI</option>
+          <option value="en">🇺🇸 EN</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <div class="subtitle"><strong>69</strong> <span class="i18n" data-vi="item · 2026-04-20" data-en="items · 2026-04-20">item · 2026-04-20</span></div>
+  <div class="controls"><button onclick="document.querySelectorAll('details.group').forEach(d=>d.open=true)"><span class="i18n" data-vi="Mở tất cả" data-en="Expand all">Mở tất cả</span></button><button onclick="document.querySelectorAll('details.group').forEach(d=>d.open=false)"><span class="i18n" data-vi="Đóng tất cả" data-en="Collapse all">Đóng tất cả</span></button></div><details class="group" open><summary><span class="source-icon">🛡️</span><span class="source-name">Security</span><span class="count">69</span></summary><ul class="items"><li><a class="title" href="https://thehackernews.com/2026/04/webinar-find-and-eliminate-orphaned-non.html" target="_blank" rel="noopener">[The Hacker News] [Webinar] Eliminate Ghost Identities Before They Expose Your Enterprise Data</a><div class="date">Sat, 18 Apr 2026 13:37:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/1374m-hack-shuts-down-sanctioned-grinex.html" target="_blank" rel="noopener">[The Hacker News] $13.74M Hack Shuts Down Sanctioned Grinex Exchange After Intelligence Claims</a><div class="date">Sat, 18 Apr 2026 13:29:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/mirai-variant-nexcorium-exploits-cve.html" target="_blank" rel="noopener">[The Hacker News] Mirai Variant Nexcorium Exploits CVE-2024-3721 to Hijack TBK DVRs for DDoS Botnet</a><div class="date">Sat, 18 Apr 2026 11:31:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/three-microsoft-defender-zero-days.html" target="_blank" rel="noopener">[The Hacker News] Three Microsoft Defender Zero-Days Actively Exploited; Two Still Unpatched</a><div class="date">Fri, 17 Apr 2026 18:51:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/google-blocks-83b-policy-violating-ads.html" target="_blank" rel="noopener">[The Hacker News] Google Blocks 8.3B Policy-Violating Ads in 2025, Launches Android 17 Privacy Overhaul</a><div class="date">Fri, 17 Apr 2026 16:17:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/nist-limits-cve-enrichment-after-263.html" target="_blank" rel="noopener">[The Hacker News] NIST Limits CVE Enrichment After 263% Surge in Vulnerability Submissions</a><div class="date">Fri, 17 Apr 2026 12:44:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/operation-poweroff-seizes-53-ddos.html" target="_blank" rel="noopener">[The Hacker News] Operation PowerOFF Seizes 53 DDoS Domains, Exposes 3 Million Criminal Accounts</a><div class="date">Fri, 17 Apr 2026 11:16:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/apache-activemq-cve-2026-34197-added-to.html" target="_blank" rel="noopener">[The Hacker News] Apache ActiveMQ CVE-2026-34197 Added to CISA KEV Amid Active Exploitation</a><div class="date">Fri, 17 Apr 2026 08:52:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/newly-discovered-powmix-botnet-hits.html" target="_blank" rel="noopener">[The Hacker News] Newly Discovered PowMix Botnet Hits Czech Workers Using Randomized C2 Traffic</a><div class="date">Thu, 16 Apr 2026 23:22:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/threatsday-bulletin-17-year-old-excel.html" target="_blank" rel="noopener">[The Hacker News] ThreatsDay Bulletin: Defender 0-Day, SonicWall Brute-Force, 17-Year-Old Excel RCE and 15 More Stories</a><div class="date">Thu, 16 Apr 2026 18:35:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/cisco-patches-four-critical-identity.html" target="_blank" rel="noopener">[The Hacker News] Cisco Patches Four Critical Identity Services, Webex Flaws Enabling Code Execution</a><div class="date">Thu, 16 Apr 2026 16:57:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/obsidian-plugin-abuse-delivers.html" target="_blank" rel="noopener">[The Hacker News] Obsidian Plugin Abuse Delivers PHANTOMPULSE RAT in Targeted Finance, Crypto Attacks</a><div class="date">Thu, 16 Apr 2026 15:50:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/uac-0247-targets-ukrainian-clinics-and.html" target="_blank" rel="noopener">[The Hacker News] UAC-0247 Targets Ukrainian Clinics and Government in Data-Theft Malware Campaign</a><div class="date">Thu, 16 Apr 2026 11:50:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/n8n-webhooks-abused-since-october-2025.html" target="_blank" rel="noopener">[The Hacker News] n8n Webhooks Abused Since October 2025 to Deliver Malware via Phishing Emails</a><div class="date">Wed, 15 Apr 2026 22:39:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/critical-nginx-ui-vulnerability-cve.html" target="_blank" rel="noopener">[The Hacker News] Actively Exploited nginx-ui Flaw (CVE-2026-33032) Enables Full Nginx Server Takeover</a><div class="date">Wed, 15 Apr 2026 18:26:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/april-patch-tuesday-fixes-critical.html" target="_blank" rel="noopener">[The Hacker News] April Patch Tuesday Fixes Critical Flaws Across SAP, Adobe, Microsoft, Fortinet, and More</a><div class="date">Wed, 15 Apr 2026 18:07:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/deterministic-agentic-ai-architecture.html" target="_blank" rel="noopener">[The Hacker News] Deterministic + Agentic AI: The Architecture Exposure Validation Requires</a><div class="date">Wed, 15 Apr 2026 17:00:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/microsoft-issues-patches-for-sharepoint.html" target="_blank" rel="noopener">[The Hacker News] Microsoft Issues Patches for SharePoint Zero-Day and 168 Other New Vulnerabilities</a><div class="date">Wed, 15 Apr 2026 14:10:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/openai-launches-gpt-54-cyber-with.html" target="_blank" rel="noopener">[The Hacker News] OpenAI Launches GPT-5.4-Cyber with Expanded Access for Security Teams</a><div class="date">Wed, 15 Apr 2026 10:00:00 +0530</div></li><li><a class="title" href="https://thehackernews.com/2026/04/new-php-composer-flaws-enable-arbitrary.html" target="_blank" rel="noopener">[The Hacker News] New PHP Composer Flaws Enable Arbitrary Command Execution — Patches Released</a><div class="date">Tue, 14 Apr 2026 21:27:00 +0530</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/vercel-confirms-breach-as-hackers-claim-to-be-selling-stolen-data/" target="_blank" rel="noopener">[Bleeping Computer] Vercel confirms breach as hackers claim to be selling stolen data</a><div class="date">Sun, 19 Apr 2026 13:32:45 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/apple-account-change-alerts-abused-to-send-phishing-emails/" target="_blank" rel="noopener">[Bleeping Computer] Apple account change alerts abused to send phishing emails</a><div class="date">Sun, 19 Apr 2026 12:03:01 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/nist-to-stop-rating-non-priority-flaws-due-to-volume-increase/" target="_blank" rel="noopener">[Bleeping Computer] NIST to stop rating non-priority flaws due to volume increase</a><div class="date">Sun, 19 Apr 2026 10:17:43 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/critical-flaw-in-protobuf-library-enables-javascript-code-execution/" target="_blank" rel="noopener">[Bleeping Computer] Critical flaw in Protobuf library enables JavaScript code execution</a><div class="date">Sat, 18 Apr 2026 11:09:44 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/microsoft/microsoft-teams-right-click-paste-broken-by-edge-update-bug/" target="_blank" rel="noopener">[Bleeping Computer] Microsoft Teams right-click paste broken by Edge update bug</a><div class="date">Sat, 18 Apr 2026 10:11:21 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/nakivo-v112-ransomware-defense-faster-replication-vsphere-9-and-proxmox-ve-90-support/" target="_blank" rel="noopener">[Bleeping Computer] NAKIVO v11.2: Ransomware Defense, Faster Replication, vSphere 9, and Proxmox VE 9.0 Support</a><div class="date">Sat, 18 Apr 2026 09:45:54 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/payouts-king-ransomware-uses-qemu-vms-to-bypass-endpoint-security/" target="_blank" rel="noopener">[Bleeping Computer] Payouts King ransomware uses QEMU VMs to bypass endpoint security</a><div class="date">Fri, 17 Apr 2026 15:10:19 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/grinex-exchange-blames-western-intelligence-for-137m-crypto-hack/" target="_blank" rel="noopener">[Bleeping Computer] Grinex exchange blames &quot;Western intelligence&quot; for $13.7M crypto hack</a><div class="date">Fri, 17 Apr 2026 11:08:53 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/inside-an-underground-guide-how-threat-actors-vet-stolen-credit-card-shops/" target="_blank" rel="noopener">[Bleeping Computer] Inside an Underground Guide: How Threat Actors Vet Stolen Credit Card Shops</a><div class="date">Fri, 17 Apr 2026 10:01:11 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/webinar-from-phishing-to-fallout-why-msps-must-rethink-both-security-and-recovery/" target="_blank" rel="noopener">[Bleeping Computer] Webinar: From phishing to fallout — Why MSPs must rethink both security and recovery</a><div class="date">Fri, 17 Apr 2026 08:20:28 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/cisa-flags-apache-activemq-flaw-as-actively-exploited-in-attacks/" target="_blank" rel="noopener">[Bleeping Computer] CISA flags Apache ActiveMQ flaw as actively exploited in attacks</a><div class="date">Fri, 17 Apr 2026 05:30:15 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/microsoft/microsoft-warns-of-reboot-loops-affecting-some-domain-controllers/" target="_blank" rel="noopener">[Bleeping Computer] Microsoft: Some Windows servers enter reboot loops after April patches</a><div class="date">Fri, 17 Apr 2026 03:59:47 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/man-gets-30-months-for-selling-thousands-of-hacked-draftkings-accounts/" target="_blank" rel="noopener">[Bleeping Computer] Man gets 30 months for selling thousands of hacked DraftKings accounts</a><div class="date">Fri, 17 Apr 2026 03:10:32 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/recently-leaked-windows-zero-days-now-exploited-in-attacks/" target="_blank" rel="noopener">[Bleeping Computer] Recently leaked Windows zero-days now exploited in attacks</a><div class="date">Fri, 17 Apr 2026 02:14:52 -0400</div></li><li><a class="title" href="https://www.bleepingcomputer.com/news/security/operation-poweroff-identifies-75k-ddos-users-takes-down-53-domains/" target="_blank" rel="noopener">[Bleeping Computer] Operation PowerOFF identifies 75k DDoS users, takes down 53 domains</a><div class="date">Thu, 16 Apr 2026 18:26:34 -0400</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/04/patch-tuesday-april-2026-edition/" target="_blank" rel="noopener">[Krebs on Security] Patch Tuesday, April 2026 Edition</a><div class="date">Tue, 14 Apr 2026 21:47:59 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/04/russia-hacked-routers-to-steal-microsoft-office-tokens/" target="_blank" rel="noopener">[Krebs on Security] Russia Hacked Routers to Steal Microsoft Office Tokens</a><div class="date">Tue, 07 Apr 2026 17:02:44 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/04/germany-doxes-unkn-head-of-ru-ransomware-gangs-revil-gandcrab/" target="_blank" rel="noopener">[Krebs on Security] Germany Doxes “UNKN,” Head of RU Ransomware Gangs REvil, GandCrab</a><div class="date">Mon, 06 Apr 2026 02:07:17 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/03/canisterworm-springs-wiper-attack-targeting-iran/" target="_blank" rel="noopener">[Krebs on Security] ‘CanisterWorm’ Springs Wiper Attack Targeting Iran</a><div class="date">Mon, 23 Mar 2026 15:43:04 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/03/feds-disrupt-iot-botnets-behind-huge-ddos-attacks/" target="_blank" rel="noopener">[Krebs on Security] Feds Disrupt IoT Botnets Behind Huge DDoS Attacks</a><div class="date">Fri, 20 Mar 2026 00:49:19 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/03/iran-backed-hackers-claim-wiper-attack-on-medtech-firm-stryker/" target="_blank" rel="noopener">[Krebs on Security] Iran-Backed Hackers Claim Wiper Attack on Medtech Firm Stryker</a><div class="date">Wed, 11 Mar 2026 16:20:13 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/03/microsoft-patch-tuesday-march-2026-edition/" target="_blank" rel="noopener">[Krebs on Security] Microsoft Patch Tuesday, March 2026 Edition</a><div class="date">Wed, 11 Mar 2026 00:32:51 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/03/how-ai-assistants-are-moving-the-security-goalposts/" target="_blank" rel="noopener">[Krebs on Security] How AI Assistants are Moving the Security Goalposts</a><div class="date">Sun, 08 Mar 2026 23:35:42 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/02/who-is-the-kimwolf-botmaster-dort/" target="_blank" rel="noopener">[Krebs on Security] Who is the Kimwolf Botmaster “Dort”?</a><div class="date">Sat, 28 Feb 2026 12:01:57 +0000</div></li><li><a class="title" href="https://krebsonsecurity.com/2026/02/starkiller-phishing-service-proxies-real-login-pages-mfa/" target="_blank" rel="noopener">[Krebs on Security] ‘Starkiller’ Phishing Service Proxies Real Login Pages, MFA</a><div class="date">Fri, 20 Feb 2026 20:00:30 +0000</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/friday-squid-blogging-new-giant-squid-video-2.html" target="_blank" rel="noopener">[Schneier on Security] Friday Squid Blogging: New Giant Squid Video</a><div class="date">2026-04-17T21:05:07Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/mythos-and-cybersecurity.html" target="_blank" rel="noopener">[Schneier on Security] Mythos and Cybersecurity</a><div class="date">2026-04-17T11:02:37Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/human-trust-of-ai-agents.html" target="_blank" rel="noopener">[Schneier on Security] Human Trust of AI Agents</a><div class="date">2026-04-16T09:41:24Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/defense-in-depth-medieval-style.html" target="_blank" rel="noopener">[Schneier on Security] Defense in Depth, Medieval Style</a><div class="date">2026-04-15T10:47:55Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/upcoming-speaking-engagements-55.html" target="_blank" rel="noopener">[Schneier on Security] Upcoming Speaking Engagements</a><div class="date">2026-04-14T16:01:47Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/how-hackers-are-thinking-about-ai.html" target="_blank" rel="noopener">[Schneier on Security] How Hackers Are Thinking About AI</a><div class="date">2026-04-14T10:49:50Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/on-anthropics-mythos-preview-and-project-glasswing.html" target="_blank" rel="noopener">[Schneier on Security] On Anthropic’s Mythos Preview and Project Glasswing</a><div class="date">2026-04-13T16:52:57Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/ai-chatbots-and-trust.html" target="_blank" rel="noopener">[Schneier on Security] AI Chatbots and Trust</a><div class="date">2026-04-13T10:10:45Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/friday-squid-blogging-squid-overfishing-in-the-south-pacific.html" target="_blank" rel="noopener">[Schneier on Security] Friday Squid Blogging: Squid Overfishing in the South Pacific</a><div class="date">2026-04-10T21:03:27Z</div></li><li><a class="title" href="https://www.schneier.com/blog/archives/2026/04/sen-sanders-talks-to-claude-about-ai-and-privacy.html" target="_blank" rel="noopener">[Schneier on Security] Sen. Sanders Talks to Claude About AI and Privacy</a><div class="date">2026-04-10T10:41:06Z</div></li><li><a class="title" href="https://www.securityweek.com/tycoon-2fa-loses-phishing-kit-crown-amid-surge-in-attacks/" target="_blank" rel="noopener">[SecurityWeek] Tycoon 2FA Loses Phishing Kit Crown Amid Surge in Attacks</a><div class="date">Sat, 18 Apr 2026 10:30:00 +0000</div></li><li><a class="title" href="https://www.securityweek.com/white-house-chief-of-staff-to-meet-ith-anthropic-ceo-over-its-new-ai-technology/" target="_blank" rel="noopener">[SecurityWeek] White House Chief of Staff to Meet With Anthropic CEO Over Its New AI Technology</a><div class="date">Fri, 17 Apr 2026 19:00:00 +0000</div></li><li><a class="title" href="https://www.securityweek.com/cochat-launches-ai-collaboration-platform-to-combat-shadow-ai/" target="_blank" rel="noopener">[SecurityWeek] CoChat Launches AI Collaboration Platform to Combat Shadow AI</a><div class="date">Fri, 17 Apr 2026 15:00:00 +0000</div></li><li><a class="title" href="https://www.securityweek.com/in-other-news-satellite-cybersecurity-act-90k-chrome-flaw-teen-hacker-arrested/" target="_blank" rel="noopener">[SecurityWeek] In Other News: Satellite Cybersecurity Act, $90K Chrome Flaw, Teen Hacker Arrested</a><div class="date">Fri, 17 Apr 2026 12:00:00 +0000</div></li><li><a class="title" href="https://www.securityweek.com/another-draftkings-hacker-sentenced-to-prison/" target="_blank" rel="noopener">[SecurityWeek] Another DraftKings Hacker Sentenced to Prison</a><div class="date">Fri, 17 Apr 2026 10:45:13 +0000</div></li><li><a class="title" href="https://www.securityweek.com/lawmakers-gathered-quietly-to-talk-about-ai-angst-and-fears-of-destruction-followed/" target="_blank" rel="noopener">[SecurityWeek] Lawmakers Gathered Quietly to Talk About AI. Angst and Fears of ‘Destruction’ Followed</a><div class="date">Fri, 17 Apr 2026 10:15:00 +0000</div></li><li><a class="title" href="https://www.securityweek.com/recent-apache-activemq-vulnerability-exploited-in-the-wild/" target="_blank" rel="noopener">[SecurityWeek] Recent Apache ActiveMQ Vulnerability Exploited in the Wild</a><div class="date">Fri, 17 Apr 2026 09:50:22 +0000</div></li><li><a class="title" href="https://www.securityweek.com/two-north-korean-it-worker-scheme-facilitators-jailed-in-the-us/" target="_blank" rel="noopener">[SecurityWeek] Two North Korean IT Worker Scheme Facilitators Jailed in the US</a><div class="date">Fri, 17 Apr 2026 09:21:02 +0000</div></li><li><a class="title" href="https://www.securityweek.com/zionsiphon-malware-targets-ics-in-water-facilities/" target="_blank" rel="noopener">[SecurityWeek] ZionSiphon Malware Targets ICS in Water Facilities</a><div class="date">Fri, 17 Apr 2026 08:30:00 +0000</div></li><li><a class="title" href="https://www.securityweek.com/cursor-ai-vulnerability-exposed-developer-devices/" target="_blank" rel="noopener">[SecurityWeek] Cursor AI Vulnerability Exposed Developer Devices</a><div class="date">Fri, 17 Apr 2026 07:29:16 +0000</div></li><li><a class="title" href="https://projectzero.google/2026/03/mutational-grammar-fuzzing.html" target="_blank" rel="noopener">[Google Project Zero] On the Effectiveness of Mutational Grammar Fuzzing</a><div class="date">2026-03-05T00:00:00-08:00</div></li><li><a class="title" href="https://projectzero.google/2026/02/gphfh-deep-dive.html" target="_blank" rel="noopener">[Google Project Zero] A Deep Dive into the GetProcessHandleFromHwnd API</a><div class="date">2026-02-26T00:00:00-08:00</div></li><li><a class="title" href="https://projectzero.google/2026/02/windows-administrator-protection.html" target="_blank" rel="noopener">[Google Project Zero] Bypassing Administrator Protection by Abusing UI Access</a><div class="date">2026-02-12T00:00:00-08:00</div></li><li><a class="title" href="https://projectzero.google/2026/01/sound-barrier-2.html" target="_blank" rel="noopener">[Google Project Zero] Breaking the Sound Barrier, Part II: Exploiting CVE-2024-54529</a><div class="date">2026-01-30T00:00:00-08:00</div></li></ul></details>
+  <footer class="page-footer">
+    <span><span class="i18n" data-vi="Tech Radar · build lúc 2026-04-21 07:10" data-en="Tech Radar · built 2026-04-21 07:10">Tech Radar · build lúc 2026-04-21 07:10</span></span>
+    <a href="https://github.com/hueanmy/tech-radar" target="_blank"><span class="i18n" data-vi="nguồn ↗" data-en="source ↗">nguồn ↗</span></a>
+  </footer>
+</main>
+<aside class="right-rail">
+<section class="video-hero">
+  <div class="video-body">
+    <div class="eyebrow"><span class="i18n" data-vi="● Tóm tắt mỗi ngày" data-en="● Daily digest">● Tóm tắt mỗi ngày</span></div>
+    <h3 class="i18n" data-vi="Tóm tắt 45s" data-en="45s digest">Tóm tắt 45s</h3>
+    <p class="i18n" data-vi="69 cập nhật t2 20/04 — click video để bật tiếng. Xem thêm trên kênh:" data-en="69 updates mon 20/04 — tap video to unmute. Follow the channel for more:">69 cập nhật t2 20/04 — click video để bật tiếng. Xem thêm trên kênh:</p>
+    <div class="socials">
+      <a class="social youtube" href="https://www.youtube.com/@studyingwithmeii" target="_blank" rel="noopener">
+        <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg></span>
+        YouTube
+      </a>
+      <a class="social tiktok" href="https://www.tiktok.com/@studyingwithmeii" target="_blank" rel="noopener">
+        <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.8 5.8 0 0 1-3.4-1.1 5.8 5.8 0 0 1-2.3-3.9h-3.7v13.1a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .7.1V8.6a6.4 6.4 0 0 0-.7 0 6.4 6.4 0 1 0 6.4 6.4V8.5a9.3 9.3 0 0 0 5.4 1.7V6.5a5.5 5.5 0 0 1-.1.3Z"/></svg></span>
+        TikTok
+      </a>
+    </div>
+  </div>
+  <div class="video-wrap">
+    <video src="../videos/2026-04-20.mp4" autoplay muted loop playsinline preload="metadata"
+           onclick="this.muted=!this.muted"></video>
+  </div>
+</section></aside>
+</div>
+<script>
+window.setLang = function(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.i18n').forEach(function(el){
+    var v = el.dataset[lang];
+    if (v != null) el.textContent = v;
+  });
+  var sel = document.querySelector('.lang-dropdown select');
+  if (sel && sel.value !== lang) sel.value = lang;
+  try { localStorage.setItem('lang', lang); } catch(e){}
+};
+(function(){
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch(e){}
+  var lang = saved || ((navigator.language || '').toLowerCase().indexOf('vi') === 0 ? 'vi' : 'en');
+  window.setLang(lang);
+})();
+</script>
+</body>
+</html>

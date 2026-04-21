@@ -480,9 +480,12 @@ def _render_sidebar(current_day: date, today: date, past: list[date]) -> str:
     for d in ordered[:RETENTION_DAYS]:
         is_current = d == current_day
         is_today = d == today
-        href = "index.html" if is_today else f"{d.isoformat()}.html"
-        if current_day != today:
-            href = f"../index.html" if is_today else f"{d.isoformat()}.html"
+        if current_day == today:
+            # rendering docs/index.html → archive pages are under archive/
+            href = "index.html" if is_today else f"archive/{d.isoformat()}.html"
+        else:
+            # rendering docs/archive/*.html → archive pages are siblings
+            href = "../index.html" if is_today else f"{d.isoformat()}.html"
         if is_today:
             label = _i18n("Hôm nay", "Today")
         else:

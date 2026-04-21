@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm config *)",
+      "Bash(cp /Users/meii/Downloads/IMG_0250.JPG /Users/meii/Documents/tools/hueanmy.github.io/public/momo-qr.jpg)",
+      "Bash(cp /Users/meii/Downloads/IMG_0251.JPG /Users/meii/Documents/tools/hueanmy.github.io/public/vietqr.jpg)",
+      "Bash(curl -sL -o /Users/meii/Documents/tools/hueanmy.github.io/public/avatar.jpg https://github.com/hueanmy.png)",
+      "WebFetch(domain:open-vsx.org)",
+      "Bash(gh auth *)",
+      "Bash(gh repo *)",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(python3 -m pip install -q streamlit anthropic)",
+      "Bash(python3 -m streamlit run app.py --server.port 8501 --server.headless true --browser.gatherUsageStats false)",
+      "Bash(curl -s http://localhost:8501)",
+      "Bash(python3 -m py_compile /private/tmp/prompt-eval-demo/app.py)",
+      "Bash(pkill -f \"streamlit run app.py\")",
+      "Bash(python3 -c \"import playwright; print\\('playwright installed'\\)\")"
+    ],
+    "additionalDirectories": [
+      "/Users/meii/Documents/tools/hueanmy.github.io",
+      "/Users/meii"
+    ]
+  },
+  "mcpServers": {
+    "sdlc": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "github:hueanmy/aidlc-pipeline"
+      ],
+      "env": {
+        "SDLC_PLATFORM": "mobile"
+      }
+    }
+  }
+}

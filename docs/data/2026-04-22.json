@@ -1,0 +1,51 @@
+[
+  {
+    "source": "AI YouTube",
+    "title": "[Fireship] Anthropic just chose its next victim...",
+    "url": "https://www.youtube.com/watch?v=jeA-KBv0b68",
+    "published": "2026-04-21T18:10:12.140795+00:00",
+    "summary": "Run any code on Google’s world-class infrastructure - https://cloud.run. Get 2 million free requests per month\n\nClaude Design could be Anthropic's most disruptive tool since Claude Code...."
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v42.0.0-beta.6",
+    "url": "https://github.com/electron/electron/releases/tag/v42.0.0-beta.6",
+    "published": "2026-04-21T21:54:57Z",
+    "summary": "<p>Note: This is a beta release.  Please file new issues for any bugs you find in it.</p>\n<p>This release is published to npm under the beta tag and can be installed via <code>npm install electron@bet"
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v40.9.2",
+    "url": "https://github.com/electron/electron/releases/tag/v40.9.2",
+    "published": "2026-04-21T22:36:07Z",
+    "summary": "<h1>Release Notes for v40.9.2</h1>\n<h2>Fixes</h2>\n<ul>\n<li>Fixed an issue where <code>nodeIntegrationInWorker</code> didn't always work in AudioWorklet. <a href=\"https://github.com/electron/electron/p"
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v39.8.9",
+    "url": "https://github.com/electron/electron/releases/tag/v39.8.9",
+    "published": "2026-04-21T22:28:09Z",
+    "summary": "<h1>Release Notes for v39.8.9</h1>\n<h2>Other Changes</h2>\n<ul>\n<li>Fixed <code>gn gen</code> failing to resolve <code>electron_version</code> when building from a <code>git worktree</code> checkout. <"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] SystemBC C2 Server Reveals 1,570+ Victims in The Gentlemen Ransomware Operation",
+    "url": "https://thehackernews.com/2026/04/systembc-c2-server-reveals-1570-victims.html",
+    "published": "Tue, 21 Apr 2026 23:48:00 +0530",
+    "summary": "Threat actors associated with The Gentlemen ransomware‑as‑a‑service (RaaS) operation have been observed attempting to deploy a known proxy malware called SystemBC.\nAccording to new research published "
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] French govt agency confirms breach as hacker offers to sell data",
+    "url": "https://www.bleepingcomputer.com/news/security/french-govt-agency-confirms-breach-as-hacker-offers-to-sell-data/",
+    "published": "Tue, 21 Apr 2026 17:46:04 -0400",
+    "summary": "France Titres, the government agency in France for issuing and managince administrative documents has disclosed a data breach after a threat actor claimed the attack and stealing citizen data. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New Lotus data wiper used against Venezuelan energy, utility firms",
+    "url": "https://www.bleepingcomputer.com/news/security/new-lotus-data-wiper-used-against-venezuelan-energy-utility-firms/",
+    "published": "Tue, 21 Apr 2026 14:38:40 -0400",
+    "summary": "A previously undocumented data-wiping malware dubbed Lotus was used last year in targeted attacks against energy and utilities organizations in Venezuela. [...]"
+  }
+]

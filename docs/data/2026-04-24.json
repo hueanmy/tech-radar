@@ -1,0 +1,44 @@
+[
+  {
+    "source": "AI YouTube",
+    "title": "[Fireship] I finally found a use case for OpenClaw…",
+    "url": "https://www.youtube.com/watch?v=FM5-R4VPArw",
+    "published": "2026-04-23T19:01:55.706916+00:00",
+    "summary": "Get up to 67% off OpenClaw VPS hosting with Hostinger's one-click template. Use code FIRESHIP for an extra discount - https://hostinger.com/openclawfireship\n\nBack in January, OpenClaw's wild..."
+  },
+  {
+    "source": "AI YouTube",
+    "title": "[Matthew Berman] OpenAI is BACK (GPT-5.5)",
+    "url": "https://www.youtube.com/watch?v=tNV9_I-zLO0",
+    "published": "2026-04-23T23:48:09.273672+00:00",
+    "summary": "GPT-5.5 will be available soon in Box AI! https://bit.ly/4cMv3tG\n\nDownload The 25 OpenClaw Use Cases eBook 👇🏼\nhttps://bit.ly/4aBQwo1\n\nDownload The Subtle Art of Not Being Replaced 👇🏼..."
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] UNC6692 Impersonates IT Helpdesk via Microsoft Teams to Deploy SNOW Malware",
+    "url": "https://thehackernews.com/2026/04/unc6692-impersonates-it-helpdesk-via.html",
+    "published": "Thu, 23 Apr 2026 23:46:00 +0530",
+    "summary": "A previously undocumented threat activity cluster known as UNC6692 has been observed leveraging social engineering tactics via Microsoft Teams to deploy a custom malware suite on compromised hosts.\n\"A"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Hackers exploit file upload bug in Breeze Cache WordPress plugin",
+    "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-file-upload-bug-in-breeze-cache-wordpress-plugin/",
+    "published": "Thu, 23 Apr 2026 17:33:45 -0400",
+    "summary": "Hackers are actively exploiting a critical vulnerability in the Breeze Cache plugin for WordPress that allows uploading arbitrary files on the server without authentication. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Bitwarden CLI npm package compromised to steal developer credentials",
+    "url": "https://www.bleepingcomputer.com/news/security/bitwarden-cli-npm-package-compromised-to-steal-developer-credentials/",
+    "published": "Thu, 23 Apr 2026 15:21:01 -0400",
+    "summary": "The Bitwarden CLI was briefly compromised after attackers uploaded a malicious @bitwarden/cli package to npm containing a credential-stealing payload capable of spreading to other projects. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Trigona ransomware attacks use custom exfiltration tool to steal data",
+    "url": "https://www.bleepingcomputer.com/news/security/trigona-ransomware-attacks-use-custom-exfiltration-tool-to-steal-data/",
+    "published": "Thu, 23 Apr 2026 14:59:39 -0400",
+    "summary": "Recently observed Trigona ransomware attacks are using a custom, command-line tool to steal data from compromised environments faster and more efficiently. [...]"
+  }
+]

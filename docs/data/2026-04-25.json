@@ -1,0 +1,72 @@
+[
+  {
+    "source": "AI YouTube",
+    "title": "[AI Explained] GPT 5.5, DeepSeek V4, and the Era of Scarcity",
+    "url": "https://www.youtube.com/watch?v=jz0rNhfAKo8",
+    "published": "2026-04-24T19:00:36.745564+00:00",
+    "summary": "GPT 5.5 full analysis, plus DeepSeek V4 paper highlights, comparisons with Mythos, a vibe-coded game w/ GPT Image 2, and 50 data-points you wouldn’t get from just reading the headlines.\n..."
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] v43.0.0-nightly.20260424",
+    "url": "https://github.com/electron/electron/releases/tag/v43.0.0-nightly.20260424",
+    "published": "2026-04-24T20:20:51Z",
+    "summary": "<p>v43.0.0-nightly.20260424</p>"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] FIRESTARTER Backdoor Hit Federal Cisco Firepower Device, Survives Security Patches",
+    "url": "https://thehackernews.com/2026/04/firestarter-backdoor-hit-federal-cisco.html",
+    "published": "Fri, 24 Apr 2026 22:36:00 +0530",
+    "summary": "The U.S. Cybersecurity and Infrastructure Security Agency (CISA) has revealed that an unnamed federal civilian agency's Cisco Firepower device running Adaptive Security Appliance (ASA) software was co"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] ADT confirms data breach after ShinyHunters leak threat",
+    "url": "https://www.bleepingcomputer.com/news/security/adt-confirms-data-breach-after-shinyhunters-leak-threat/",
+    "published": "Fri, 24 Apr 2026 18:53:14 -0400",
+    "summary": "Home security giant ADT has confirmed a data breach after the ShinyHunters extortion group threatened to leak stolen data unless a ransom is paid. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Firestarter malware survives Cisco firewall updates, security patches",
+    "url": "https://www.bleepingcomputer.com/news/security/firestarter-malware-survives-cisco-firewall-updates-security-patches/",
+    "published": "Fri, 24 Apr 2026 16:34:08 -0400",
+    "summary": "Cybersecurity agencies in the U.S. and U.K. are warning about a custom malware called Firestarter persisting on Cisco Firepower and Secure Firewall devices running Adaptive Security Appliance (ASA) or"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Windows Update gets new controls to reduce forced restarts",
+    "url": "https://www.bleepingcomputer.com/news/microsoft/windows-update-gets-new-controls-to-reduce-forced-restarts/",
+    "published": "Fri, 24 Apr 2026 16:08:26 -0400",
+    "summary": "Microsoft is rolling out Windows Update improvements that give users more control over how updates are installed while reducing disruption from frequent or poorly timed restarts. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New BlackFile extortion group linked to surge of vishing attacks",
+    "url": "https://www.bleepingcomputer.com/news/security/new-blackfile-extortion-gang-targets-retail-and-hospitality-orgs/",
+    "published": "Fri, 24 Apr 2026 14:26:27 -0400",
+    "summary": "A new financially motivated hacking group tracked as BlackFile has been linked to a wave of data theft and extortion attacks against retail and hospitality organizations since February 2026. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Microsoft to roll out Entra passkeys on Windows in late April",
+    "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-to-roll-out-entra-passkeys-on-windows-in-late-april/",
+    "published": "Fri, 24 Apr 2026 14:13:55 -0400",
+    "summary": "Microsoft will roll out passkey support for phishing-resistant passwordless authentication to Microsoft Entra‑protected resources from Windows devices starting late April. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New ‘Pack2TheRoot’ flaw gives hackers root Linux access",
+    "url": "https://www.bleepingcomputer.com/news/security/new-pack2theroot-flaw-gives-hackers-root-linux-access/",
+    "published": "Fri, 24 Apr 2026 13:28:46 -0400",
+    "summary": "A new vulnerability dubbed Pack2TheRoot could be exploited in the PackageKit daemon to allow local Linux users to install or remove system packages and gain root permissions. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Schneier on Security] Friday Squid Blogging: How Squid Survived Extinction Events",
+    "url": "https://www.schneier.com/blog/archives/2026/04/friday-squid-blogging-how-squid-survived-extinction-events.html",
+    "published": "2026-04-24T21:03:23Z",
+    "summary": "<p>Science <a href=\"https://www.sciencedaily.com/releases/2026/03/260331001100.htm\">news</a>:</p>\n<blockquote><p>Scientists have finally cracked a long-standing mystery about squid and cuttlefish evol"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "source": "AI YouTube",
+    "title": "[Matt Wolfe] ChatGPT Images Just Got Way Better (Here's Why)",
+    "url": "https://www.youtube.com/watch?v=2u_T68P9H_U",
+    "published": "2026-04-28T18:10:09.546532+00:00",
+    "summary": "Here's a breakdown of tons of cool ways to use the brand new ChatGPT Image model. Check out cool AI tools here: https://futuretools.io\n\nDiscover More:\n🛠️ Explore AI Tools & News: https://futur..."
+  },
+  {
+    "source": "AI YouTube",
+    "title": "[Two Minute Papers] Solved: The Bug That Haunted AI Video For Years",
+    "url": "https://www.youtube.com/watch?v=yzajLZXh9JU",
+    "published": "2026-04-28T18:10:10.201585+00:00",
+    "summary": "❤️ Check out Lambda here and sign up for their GPU Cloud: https://lambda.ai/papers\n\n📝 The paper is available here:\nhttps://research.nvidia.com/labs/sil/projects/MOTIVE/\n\nOur Patreon..."
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] Researchers Discover Critical GitHub CVE-2026-3854 RCE Flaw Exploitable via Single Git Push",
+    "url": "https://thehackernews.com/2026/04/researchers-discover-critical-github.html",
+    "published": "Tue, 28 Apr 2026 23:49:00 +0530",
+    "summary": "Cybersecurity researchers have disclosed details of a critical security vulnerability impacting GitHub.com and GitHub Enterprise Server that could allow an authenticated user to obtain remote code exe"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] Brazilian LofyGang Resurfaces After Three Years With Minecraft LofyStealer Campaign",
+    "url": "https://thehackernews.com/2026/04/brazilian-lofygang-resurfaces-after.html",
+    "published": "Tue, 28 Apr 2026 23:09:00 +0530",
+    "summary": "A cybercrime group of Brazilian origin has resurfaced after more than three years to orchestrate a campaign that targets Minecraft players with a new stealer called LofyStealer (aka GrabBot).\n\"The mal"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Broken VECT 2.0 ransomware acts as a data wiper for large files",
+    "url": "https://www.bleepingcomputer.com/news/security/broken-vect-20-ransomware-acts-as-a-data-wiper-for-large-files/",
+    "published": "Tue, 28 Apr 2026 17:25:57 -0400",
+    "summary": "Researchers are warning that the VECT 2.0 ransomware has a problem in the way it handles encryption nonces that leads to permanently destroying larger files rather than encrypt them. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Hackers are exploiting a critical LiteLLM pre-auth SQLi flaw",
+    "url": "https://www.bleepingcomputer.com/news/security/hackers-are-exploiting-a-critical-litellm-pre-auth-sqli-flaw/",
+    "published": "Tue, 28 Apr 2026 17:07:23 -0400",
+    "summary": "Hackers are targeting sensitive information stored in the LiteLLM open-source large-language model (LLM) gateway by exploiting a critical vulnerability  tracked as CVE-2026-42208. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Video service Vimeo confirms Anodot breach exposed user data",
+    "url": "https://www.bleepingcomputer.com/news/security/video-service-vimeo-confirms-anodot-breach-exposed-user-data/",
+    "published": "Tue, 28 Apr 2026 15:04:22 -0400",
+    "summary": "Vimeo has disclosed that data belonging to some of its customers and users has been accessed without authorization following the recent breach at the Anodot data anomaly detection company. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[SecurityWeek] Cyber Insurance Data Gives CISOs New Ammo for Budget Talks",
+    "url": "https://www.securityweek.com/cyber-insurance-data-gives-cisos-new-ammo-for-budget-talks/",
+    "published": "Tue, 28 Apr 2026 18:32:11 +0000",
+    "summary": "<p>Boards may ignore alerts, but they listen to losses: new data from Resilience links security gaps directly to financial impact.</p>\n<p>The post <a href=\"https://www.securityweek.com/cyber-insurance"
+  },
+  {
+    "source": "Security",
+    "title": "[SecurityWeek] Vimeo Confirms User and Customer Data Breach",
+    "url": "https://www.securityweek.com/vimeo-confirms-user-and-customer-data-breach/",
+    "published": "Tue, 28 Apr 2026 17:11:55 +0000",
+    "summary": "<p>The ShinyHunters group is threatening to leak stolen files unless Vimeo agrees to pay a ransom.</p>\n<p>The post <a href=\"https://www.securityweek.com/vimeo-confirms-user-and-customer-data-breach/\">"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Instructure confirms data breach, ShinyHunters claims attack",
+    "url": "https://www.bleepingcomputer.com/news/security/instructure-confirms-data-breach-shinyhunters-claims-attack/",
+    "published": "Sun, 03 May 2026 18:16:27 -0400",
+    "summary": "Educational tech giant Instructure has confirmed that data was stolen in a cyberattack, with the ShinyHunters extortion gang claiming responsibility. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Microsoft Defender wrongly flags DigiCert certs as Trojan:Win32/Cerdigent.A!dha",
+    "url": "https://www.bleepingcomputer.com/news/security/microsoft-defender-wrongly-flags-digicert-certs-as-trojan-win32-cerdigentadha/",
+    "published": "Sun, 03 May 2026 14:11:25 -0400",
+    "summary": "Microsoft Defender is detecting legitimate DigiCert root certificates as Trojan:Win32/Cerdigent.A!dha, resulting in widespread false-positive alerts, and in some cases, removing certificates from Wind"
+  }
+]

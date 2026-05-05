@@ -1,0 +1,58 @@
+[
+  {
+    "source": "AI YouTube",
+    "title": "[Fireship] 732 bytes of Python just borked every Linux machine on earth…",
+    "url": "https://www.youtube.com/watch?v=lkifbWtxxlk",
+    "published": "2026-05-04T19:10:12.645510+00:00",
+    "summary": "CodeRabbit's new Slack Agent lets you manage your team's agentic workflow right in Slack - https://coderabbit.link/fireship-agent\n\nA 100% reliable logic flaw was discovered in the Linux kernel..."
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] v43.0.0-nightly.20260504",
+    "url": "https://github.com/electron/electron/releases/tag/v43.0.0-nightly.20260504",
+    "published": "2026-05-04T17:24:06Z",
+    "summary": "<p>v43.0.0-nightly.20260504</p>"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] Phishing Campaign Hits 80+ Orgs Using SimpleHelp and ScreenConnect RMM Tools",
+    "url": "https://thehackernews.com/2026/05/phishing-campaign-hits-80-orgs-using.html",
+    "published": "Mon, 04 May 2026 23:36:00 +0530",
+    "summary": "An active phishing campaign has been observed targeting multiple vectors since at least April 2025, with legitimate Remote Monitoring and Management (RMM) software as a way to establish persistent rem"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Weaver E-cology critical bug exploited in attacks since March",
+    "url": "https://www.bleepingcomputer.com/news/security/weaver-e-cology-critical-bug-exploited-in-attacks-since-march/",
+    "published": "Mon, 04 May 2026 18:12:57 -0400",
+    "summary": "Hackers have been exploiting a critical vulnerability (CVE-2026-22679) in the Weaver E-cology office automation since mid-March to run discovery commands. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Amazon SES increasingly abused in phishing to evade detection",
+    "url": "https://www.bleepingcomputer.com/news/security/amazon-ses-increasingly-abused-in-phishing-to-evade-detection/",
+    "published": "Mon, 04 May 2026 16:03:28 -0400",
+    "summary": "The Amazon Simple Email Service (SES) is being increasingly abused to send convincing phishing emails that can bypass standard security filters and render reputation-based blocks ineffective. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Backdoored PyTorch Lightning package drops credential stealer",
+    "url": "https://www.bleepingcomputer.com/news/security/backdoored-pytorch-lightning-package-drops-credential-stealer/",
+    "published": "Mon, 04 May 2026 13:15:27 -0400",
+    "summary": "A malicious version of the PyTorch Lightning package published on the Python Package Index (PyPI) delivers a credential-stealing payload targeting browsers, environment files, and cloud services. [..."
+  },
+  {
+    "source": "Security",
+    "title": "[SecurityWeek] Cisco Moves to Acquire Astrix Security to Tackle Non-Human Identity Risks",
+    "url": "https://www.securityweek.com/cisco-moves-to-acquire-astrix-security-to-tackle-non-human-identity-risks/",
+    "published": "Mon, 04 May 2026 19:00:26 +0000",
+    "summary": "<p>The acquisition strengthens Cisco’s push into identity-centric security for AI and machine access.</p>\n<p>The post <a href=\"https://www.securityweek.com/cisco-moves-to-acquire-astrix-security-to-ta"
+  },
+  {
+    "source": "Security",
+    "title": "[SecurityWeek] Trellix Source Code Repository Breached",
+    "url": "https://www.securityweek.com/trellix-source-code-repository-breached/",
+    "published": "Mon, 04 May 2026 17:23:54 +0000",
+    "summary": "<p>The cybersecurity firm’s investigation has not found any impact on its source code release or distribution process. </p>\n<p>The post <a href=\"https://www.securityweek.com/trellix-source-code-reposi"
+  }
+]

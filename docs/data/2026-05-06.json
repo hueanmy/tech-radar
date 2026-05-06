@@ -1,0 +1,44 @@
+[
+  {
+    "source": "Electron",
+    "title": "[Releases] v42.0.0",
+    "url": "https://github.com/electron/electron/releases/tag/v42.0.0",
+    "published": "2026-05-05T19:07:06Z",
+    "summary": "<p>v42.0.0</p>"
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v39.8.10",
+    "url": "https://github.com/electron/electron/releases/tag/v39.8.10",
+    "published": "2026-05-05T21:41:42Z",
+    "summary": "<h1>Release Notes for v39.8.10</h1>\n<div class=\"markdown-alert markdown-alert-warning\"><p class=\"markdown-alert-title\"><svg class=\"octicon octicon-alert mr-2\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\""
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New stealthy Quasar Linux malware targets software developers",
+    "url": "https://www.bleepingcomputer.com/news/security/new-stealthy-quasar-linux-malware-targets-software-developers/",
+    "published": "Tue, 05 May 2026 18:01:39 -0400",
+    "summary": "A previously undocumented Linux implant named Quasar Linux (QLNX) is targeting developers' systems with a mix of rootkit, backdoor, and credential-stealing capabilities. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Instructure hacker claims data theft from 8,800 schools, universities",
+    "url": "https://www.bleepingcomputer.com/news/security/instructure-hacker-claims-data-theft-from-8-800-schools-universities/",
+    "published": "Tue, 05 May 2026 17:20:23 -0400",
+    "summary": "The hacker behind a breach at education technology giant Instructure claims to have stolen 280 million data records for students and staff from 8,809 colleges, school districts, and online education p"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] DAEMON Tools trojanized in supply-chain attack to deploy backdoor",
+    "url": "https://www.bleepingcomputer.com/news/security/daemon-tools-trojanized-in-supply-chain-attack-to-deploy-backdoor/",
+    "published": "Tue, 05 May 2026 15:21:18 -0400",
+    "summary": "Hackers trojanized installers for the DAEMON Tools software and since April 8, delivered a backdoor to thousands of systems that downloaded the product from the official website. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Student hacked Taiwan high-speed rail to trigger emergency brakes",
+    "url": "https://www.bleepingcomputer.com/news/security/student-hacked-taiwan-high-speed-rail-to-trigger-emergency-brakes/",
+    "published": "Tue, 05 May 2026 13:34:09 -0400",
+    "summary": "A 23-year-old university student in Taiwan was arrested for interfering with the TETRA communication system used by the country's high-speed railway network (THSR). [...]"
+  }
+]

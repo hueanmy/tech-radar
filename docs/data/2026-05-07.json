@@ -1,0 +1,44 @@
+[
+  {
+    "source": "AI YouTube",
+    "title": "[Two Minute Papers] DeepSeek V4 AI Beats Billion Dollar Systems…For Free",
+    "url": "https://www.youtube.com/watch?v=p7K3xfViWCE",
+    "published": "2026-05-06T17:00:09.773727+00:00",
+    "summary": "❤️ Check out Lambda here and sign up for their GPU Cloud: https://lambda.ai/papers\n\n📝 Check out DeepSeek here:\nhttps://www.deepseek.com/en/\n\nOur Patreon if you wish to support us: https://ww..."
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v43.0.0-alpha.1",
+    "url": "https://github.com/electron/electron/releases/tag/v43.0.0-alpha.1",
+    "published": "2026-05-06T19:18:27Z",
+    "summary": "<p>Note: This is an alpha release.  Please file new issues for any bugs you find in it.</p>\n<p>This release is published to npm under the alpha tag and can be installed via <code>npm install electron@"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] Mirai-Based xlabs_v1 Botnet Exploits ADB to Hijack IoT Devices for DDoS Attacks",
+    "url": "https://thehackernews.com/2026/05/mirai-based-xlabsv1-botnet-exploits-adb.html",
+    "published": "Thu, 07 May 2026 01:51:00 +0530",
+    "summary": "Cybersecurity researchers have exposed a new Mirai-derived botnet that self-identifies as xlabs_v1 and targets internet-exposed devices running Android Debug Bridge (ADB) to enlist them in a network c"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Hackers abuse Google ads for GoDaddy ManageWP login phishing",
+    "url": "https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-for-godaddy-managewp-login-phishing/",
+    "published": "Wed, 06 May 2026 17:36:06 -0400",
+    "summary": "A phishing campaign delivered through Google sponsored search results is targeting credentials for ManageWP, GoDaddy's platform for managing fleets of WordPress websites. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Critical vm2 sandbox bug lets attackers execute code on hosts",
+    "url": "https://www.bleepingcomputer.com/news/security/critical-vm2-sandbox-bug-lets-attackers-execute-code-on-hosts/",
+    "published": "Wed, 06 May 2026 14:38:38 -0400",
+    "summary": "A critical vulnerability in the popular Node.js sandboxing library vm2 allows escaping the sandbox and executing arbitrary code on the host system. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New Cisco DoS flaw requires manual reboot to revive devices",
+    "url": "https://www.bleepingcomputer.com/news/security/new-cisco-dos-flaw-requires-manual-reboot-to-revive-devices/",
+    "published": "Wed, 06 May 2026 14:06:21 -0400",
+    "summary": "Cisco patched a Crosswork Network Controller and Network Services Orchestrator denial-of-service vulnerability that requires manually rebooting targeted systems for recovery. [...]"
+  }
+]

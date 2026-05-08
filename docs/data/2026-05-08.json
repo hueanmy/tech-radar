@@ -1,0 +1,58 @@
+[
+  {
+    "source": "Electron",
+    "title": "[Releases] v44.0.0-nightly.20260507",
+    "url": "https://github.com/electron/electron/releases/tag/v44.0.0-nightly.20260507",
+    "published": "2026-05-07T19:02:03Z",
+    "summary": "<p>v44.0.0-nightly.20260507</p>"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] Ivanti EPMM CVE-2026-6973 RCE Under Active Exploitation Grants Admin-Level Access",
+    "url": "https://thehackernews.com/2026/05/ivanti-epmm-cve-2026-6973-rce-under.html",
+    "published": "Thu, 07 May 2026 23:25:00 +0530",
+    "summary": "Ivanti is warning that a new security flaw impacting Endpoint Manager Mobile (EPMM) has been explored in limited attacks in the wild.\nThe high-severity vulnerability, CVE-2026-6973 (CVSS score: 7.2), "
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] PCPJack Credential Stealer Exploits 5 CVEs to Spread Worm-Like Across Cloud Systems",
+    "url": "https://thehackernews.com/2026/05/pcpjack-credential-stealer-exploits-5.html",
+    "published": "Thu, 07 May 2026 23:15:00 +0530",
+    "summary": "Cybersecurity researchers have disclosed details of a new credential theft framework dubbed PCPJack that targets exposed cloud infrastructure and ousts any artifacts linked to TeamPCP from the environ"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Canvas login portals hacked in mass ShinyHunters extortion campaign",
+    "url": "https://www.bleepingcomputer.com/news/security/canvas-login-portals-hacked-in-mass-shinyhunters-extortion-campaign/",
+    "published": "Thu, 07 May 2026 18:36:54 -0400",
+    "summary": "The ShinyHunters extortion gang has breached education technology giant Instructure again, this time exploiting another vulnerability to deface Canvas login portals for hundreds of colleges and univer"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New TCLBanker malware self-spreads over WhatsApp and Outlook",
+    "url": "https://www.bleepingcomputer.com/news/security/new-tclbanker-malware-self-spreads-over-whatsapp-and-outlook/",
+    "published": "Thu, 07 May 2026 18:06:52 -0400",
+    "summary": "A new trojan named TCLBanker, which targets 59 banking, fintech, and cryptocurrency platforms, uses a trojanized MSI installer for Logitech AI Prompt Builder to infect systems. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New PCPJack worm steals credentials, cleans TeamPCP infections",
+    "url": "https://www.bleepingcomputer.com/news/security/new-pcpjack-worm-steals-credentials-cleans-teampcp-infections/",
+    "published": "Thu, 07 May 2026 14:35:50 -0400",
+    "summary": "A new malware framework called PCPJack is stealing credentials from exposed cloud infrastructure while actively removing TeamPCP's access to the systems. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Australia warns of ClickFix attacks pushing Vidar Stealer malware",
+    "url": "https://www.bleepingcomputer.com/news/security/australia-warns-of-clickfix-attacks-pushing-vidar-stealer-malware/",
+    "published": "Thu, 07 May 2026 14:00:59 -0400",
+    "summary": "The Australian Cyber Security Center (ACSC) is warning organizations of an ongoing malware campaign using the ClickFix social engineering technique to distribute  the Vidar Stealer info-stealing malwa"
+  },
+  {
+    "source": "Security",
+    "title": "[SecurityWeek] Worries About AI’s Risks to Humanity Loom Over the Trial Pitting Musk Against OpenAI’s Leaders",
+    "url": "https://www.securityweek.com/worries-about-ais-risks-to-humanity-loom-over-the-trial-pitting-musk-against-openais-leaders/",
+    "published": "Thu, 07 May 2026 19:10:11 +0000",
+    "summary": "<p>Musk said that he could have founded OpenAI as a for-profit company, just like the other companies he started or took over. “I deliberately chose this,” he said, “for the public good.”</p>\n<p>The p"
+  }
+]

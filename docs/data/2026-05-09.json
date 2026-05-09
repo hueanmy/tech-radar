@@ -1,0 +1,44 @@
+[
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v42.0.1",
+    "url": "https://github.com/electron/electron/releases/tag/v42.0.1",
+    "published": "2026-05-08T20:52:38Z",
+    "summary": "<h1>Release Notes for v42.0.1</h1>\n<h2>Fixes</h2>\n<ul>\n<li>Fixed DesktopCapturer crash on macOS. <a href=\"https://github.com/electron/electron/pull/51506\" data-hovercard-type=\"pull_request\" data-hover"
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v41.5.1",
+    "url": "https://github.com/electron/electron/releases/tag/v41.5.1",
+    "published": "2026-05-08T18:51:56Z",
+    "summary": "<h1>Release Notes for v41.5.1</h1>\n<h2>Fixes</h2>\n<ul>\n<li>Fixed <code>app.getLoginItemSettings()</code> returning <code>undefined</code> for <code>executableWillLaunchAtLogin</code> on macOS; the pro"
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v40.10.0",
+    "url": "https://github.com/electron/electron/releases/tag/v40.10.0",
+    "published": "2026-05-08T18:47:34Z",
+    "summary": "<h1>Release Notes for v40.10.0</h1>\n<h2>Fixes</h2>\n<ul>\n<li>Fixed <code>app.getLoginItemSettings()</code> returning <code>undefined</code> for <code>executableWillLaunchAtLogin</code> on macOS; the pr"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] TCLBANKER Banking Trojan Targets Financial Platforms via WhatsApp and Outlook Worms",
+    "url": "https://thehackernews.com/2026/05/tclbanker-banking-trojan-targets.html",
+    "published": "Fri, 08 May 2026 23:42:00 +0530",
+    "summary": "Threat hunters have flagged a previously undocumented Brazilian banking trojan dubbed TCLBANKER that's capable of targeting 59 banking, fintech, and cryptocurrency platforms.\nThe activity is being tra"
+  },
+  {
+    "source": "Security",
+    "title": "[Schneier on Security] Friday Squid Blogging: Giant Squid Live in the Waters of Western Australia",
+    "url": "https://www.schneier.com/blog/archives/2026/05/friday-squid-blogging-giant-squid-live-in-the-waters-of-western-australia.html",
+    "published": "2026-05-08T21:03:28Z",
+    "summary": "<p>Evidence of them has <a href=\"https://nautil.us/giant-squid-discovered-lurking-off-the-australian-coast-1280546\">been</a> <a href=\"https://oceanographicmagazine.com/news/giant-squid-found-in-wester"
+  },
+  {
+    "source": "Security",
+    "title": "[Schneier on Security] Insider Betting on Polymarket",
+    "url": "https://www.schneier.com/blog/archives/2026/05/insider-betting-on-polymarket.html",
+    "published": "2026-05-08T17:49:01Z",
+    "summary": "<p>Insider trading is <a href=\"https://arstechnica.com/tech-policy/2026/04/more-than-half-of-all-long-shot-bets-on-polymarket-pay-off/\">rife</a> on Polymarket:</p>\n<blockquote><p>Analysis by the Anti-"
+  }
+]

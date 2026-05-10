@@ -1,0 +1,9 @@
+[
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] JDownloader site hacked to replace installers with Python RAT malware",
+    "url": "https://www.bleepingcomputer.com/news/security/jdownloader-site-hacked-to-replace-installers-with-python-rat-malware/",
+    "published": "Sat, 09 May 2026 15:27:58 -0400",
+    "summary": "The website for the popular JDownloader download manager was compromised earlier this week to distribute malicious Windows and Linux installers, with the Windows payload found deploying a Python-based"
+  }
+]

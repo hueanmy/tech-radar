@@ -1,0 +1,51 @@
+[
+  {
+    "source": "Playwright",
+    "title": "[Releases] v1.60.0",
+    "url": "https://github.com/microsoft/playwright/releases/tag/v1.60.0",
+    "published": "2026-05-11T19:08:18Z",
+    "summary": "<h2>🌐 HAR recording on Tracing</h2>\n<p><a href=\"https://playwright.dev/docs/api/class-tracing#tracing-start-har\" rel=\"nofollow\">tracing.startHar()</a> / <a href=\"https://playwright.dev/docs/api/class-"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] TeamPCP Compromises Checkmarx Jenkins AST Plugin Weeks After KICS Supply Chain Attack",
+    "url": "https://thehackernews.com/2026/05/teampcp-compromises-checkmarx-jenkins.html",
+    "published": "Tue, 12 May 2026 00:00:00 +0530",
+    "summary": "Checkmarx has confirmed that a modified version of the Jenkins AST plugin was published to the Jenkins Marketplace.\n\"If you are using Checkmarx Jenkins AST plugin, you need to ensure that you are usin"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] cPanel CVE-2026-41940 Under Active Exploitation to Deploy Filemanager Backdoor",
+    "url": "https://thehackernews.com/2026/05/cpanel-cve-2026-41940-under-active.html",
+    "published": "Mon, 11 May 2026 23:24:00 +0530",
+    "summary": "A threat actor named Mr_Rot13 has been attributed to the exploitation of a recently disclosed critical cPanel flaw to deploy a backdoor codenamed Filemanager on compromised environments.\nThe attack ex"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] GM agrees to $12.75M California settlement over sale of drivers’ data",
+    "url": "https://www.bleepingcomputer.com/news/legal/gm-agrees-to-1275m-california-settlement-over-sale-of-drivers-data/",
+    "published": "Mon, 11 May 2026 18:40:34 -0400",
+    "summary": "California Attorney General Rob Bonta announced a proposed $12.75 million settlement agreement with General Motors (GM) over allegations that the company violated the California Consumer Privacy Act ("
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Official CheckMarx Jenkins package compromised with infostealer",
+    "url": "https://www.bleepingcomputer.com/news/security/official-checkmarx-jenkins-package-compromised-with-infostealer/",
+    "published": "Mon, 11 May 2026 18:03:06 -0400",
+    "summary": "Checkmarx warned over the weekend that a rogue version of its Jenkins Application Security Testing (AST) plugin had been published on the Jenkins Marketplace. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New GhostLock tool abuses Windows API to block file access",
+    "url": "https://www.bleepingcomputer.com/news/security/new-ghostlock-tool-abuses-windows-api-to-block-file-access/",
+    "published": "Mon, 11 May 2026 18:02:00 -0400",
+    "summary": "A security researcher has released a proof-of-concept tool named GhostLock that demonstrates how a legitimate Windows file API can be abused in attacks to block access to files stored locally or on SM"
+  },
+  {
+    "source": "Security",
+    "title": "[SecurityWeek] Frame Security Emerges From Stealth With $50M for Awareness and Training Platform",
+    "url": "https://www.securityweek.com/frame-security-emerges-from-stealth-with-50m-for-awareness-and-training-platform/",
+    "published": "Mon, 11 May 2026 17:17:37 +0000",
+    "summary": "<p>Team8, Index Ventures, Picture Capital, Elad Gil, Cerca Partners, and Tesonet invested in Frame Security.</p>\n<p>The post <a href=\"https://www.securityweek.com/frame-security-emerges-from-stealth-w"
+  }
+]

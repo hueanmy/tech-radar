@@ -1,0 +1,100 @@
+[
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v41.5.2",
+    "url": "https://github.com/electron/electron/releases/tag/v41.5.2",
+    "published": "2026-05-12T19:57:15Z",
+    "summary": "<h1>Release Notes for v41.5.2</h1>\n<h2>Fixes</h2>\n<ul>\n<li>Improved external resize band positioning and scaling for frameless windows on Windows. <a href=\"https://github.com/electron/electron/pull/51"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] US govt seeks Instructure testimony on massive Canvas cyberattack",
+    "url": "https://www.bleepingcomputer.com/news/security/us-govt-seeks-instructure-testimony-on-massive-canvas-cyberattack/",
+    "published": "Tue, 12 May 2026 19:09:55 -0400",
+    "summary": "The U.S. House Committee on Homeland Security is calling on Instructure executives to testify about two cyberattacks by the ShinyHunters extortion group that targeted the company's Canvas platform, al"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] UK fines water supplier $1.3M for exposing data of 664k customers",
+    "url": "https://www.bleepingcomputer.com/news/security/uk-fines-water-supplier-13m-for-exposing-data-of-664k-customers/",
+    "published": "Tue, 12 May 2026 16:17:19 -0400",
+    "summary": "The Information Commissioner's Office has fined South Staffordshire Water Plc and parent company South Staffordshire Plc £963,900 ($1.3 million) over a cyberattack that exposed the personal data of 66"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Webinar: Fixing the gaps in network incident response",
+    "url": "https://www.bleepingcomputer.com/news/security/webinar-fixing-the-gaps-in-network-incident-response/",
+    "published": "Tue, 12 May 2026 15:46:04 -0400",
+    "summary": "IT teams often struggle to quickly coordinate responses across disparate systems during network incidents. This upcoming webinar explores how automation and AI-assisted workflows can reduce response t"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Signal adds security warnings for social engineering, phishing attacks",
+    "url": "https://www.bleepingcomputer.com/news/security/signal-adds-security-warnings-for-social-engineering-phishing-attacks/",
+    "published": "Tue, 12 May 2026 15:40:31 -0400",
+    "summary": "Signal has introduced new in-app confirmations and warning messages as additional safeguards against phishing and social engineering attempts that could lead to various forms of fraud. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Microsoft releases Windows 10 KB5087544 extended security update",
+    "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-windows-10-kb5087544-extended-security-update/",
+    "published": "Tue, 12 May 2026 14:58:34 -0400",
+    "summary": "Microsoft has released the Windows 10 KB5087544 extended security update to fix the May 2026 Patch Tuesday vulnerabilities and resolve an issue with the new Remote Desktop warnings. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Fortinet warns of critical RCE flaws in FortiSandbox and FortiAuthenticator",
+    "url": "https://www.bleepingcomputer.com/news/security/fortinet-warns-of-critical-rce-flaws-in-fortisandbox-and-fortiauthenticator/",
+    "published": "Tue, 12 May 2026 14:23:09 -0400",
+    "summary": "Fortinet has released security patches for two critical vulnerabilities in FortiSandbox and FortiAuthenticator that could enable attackers to run commands or arbitrary code. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Windows 11 KB5089549 & KB5087420 cumulative updates released",
+    "url": "https://www.bleepingcomputer.com/news/microsoft/windows-11-kb5089549-and-kb5087420-cumulative-updates-released/",
+    "published": "Tue, 12 May 2026 14:09:12 -0400",
+    "summary": "Microsoft has released Windows 11 KB5089549 and KB5087420 cumulative updates for versions 25H2/24H2 and 23H2 to fix security vulnerabilities, bugs, and add new features. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Microsoft May 2026 Patch Tuesday fixes 120 flaws, no zero-days",
+    "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-may-2026-patch-tuesday-fixes-120-flaws-no-zero-days/",
+    "published": "Tue, 12 May 2026 14:08:06 -0400",
+    "summary": "Today is Microsoft's May 2026 Patch Tuesday, with security updates for 120 flaws and no zero-days disclosed this month. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Škoda warns of customer data breach after online shop hack",
+    "url": "https://www.bleepingcomputer.com/news/security/skoda-warns-of-customer-data-breach-after-online-shop-hack/",
+    "published": "Tue, 12 May 2026 13:07:01 -0400",
+    "summary": "Škoda Auto, a wholly owned subsidiary of the Volkswagen Group, has disclosed a data breach after attackers hacked its online shop and stole the personal information of an undisclosed number of custome"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Android 17 to expand banking scam call and privacy protections",
+    "url": "https://www.bleepingcomputer.com/news/security/android-17-to-expand-banking-scam-call-and-privacy-protections/",
+    "published": "Tue, 12 May 2026 13:00:00 -0400",
+    "summary": "Android 17, expected to roll out next month, will introduce several security and privacy features focused on device theft, threat detection, and banking scam calls. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Krebs on Security] Patch Tuesday, May 2026 Edition",
+    "url": "https://krebsonsecurity.com/2026/05/patch-tuesday-may-2026-edition/",
+    "published": "Tue, 12 May 2026 21:46:45 +0000",
+    "summary": "Artificial intelligence platforms may be just as susceptible to social engineering as human beings, but they are proving remarkably good at finding security vulnerabilities in human-made computer code"
+  },
+  {
+    "source": "Security",
+    "title": "[SecurityWeek] Microsoft Patches 137 Vulnerabilities",
+    "url": "https://www.securityweek.com/microsoft-patches-137-vulnerabilities/",
+    "published": "Tue, 12 May 2026 18:07:39 +0000",
+    "summary": "<p>Fresh security updates resolve critical flaws in Azure, Windows, Dynamics 365, and the SSO Plugin for Jira &#038; Confluence.</p>\n<p>The post <a href=\"https://www.securityweek.com/microsoft-patches"
+  },
+  {
+    "source": "Security",
+    "title": "[SecurityWeek] Exaforce Raises $125 Million for Agentic SOC Platform",
+    "url": "https://www.securityweek.com/exaforce-raises-125-million-for-agentic-soc-platform/",
+    "published": "Tue, 12 May 2026 17:23:00 +0000",
+    "summary": "<p>Exaforce has raised a total of $200 million and plans on using the latest investment for product development and international expansion. </p>\n<p>The post <a href=\"https://www.securityweek.com/exaf"
+  }
+]

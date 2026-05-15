@@ -1,0 +1,65 @@
+[
+  {
+    "source": "Electron",
+    "title": "[Releases] v42.1.0",
+    "url": "https://github.com/electron/electron/releases/tag/v42.1.0",
+    "published": "2026-05-14T22:13:57Z",
+    "summary": "<p>v42.1.0</p>"
+  },
+  {
+    "source": "Electron",
+    "title": "[Releases] electron v41.6.1",
+    "url": "https://github.com/electron/electron/releases/tag/v41.6.1",
+    "published": "2026-05-14T19:09:22Z",
+    "summary": "<h1>Release Notes for v41.6.1</h1>\n<h2>Other Changes</h2>\n<ul>\n<li>Improved performance of native event emission, IPC dispatch, and option-dictionary parsing. <a href=\"https://github.com/electron/elec"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] Cisco Catalyst SD-WAN Controller Auth Bypass Actively Exploited to Gain Admin Access",
+    "url": "https://thehackernews.com/2026/05/cisco-catalyst-sd-wan-controller-auth.html",
+    "published": "Thu, 14 May 2026 23:15:20 +0530",
+    "summary": "Cisco has released updates to address a maximum-severity authentication bypass flaw in Catalyst SD-WAN Controller that it said has been exploited in limited attacks.\nThe vulnerability, tracked as CVE-"
+  },
+  {
+    "source": "Security",
+    "title": "[The Hacker News] Stealer Backdoor Found in 3 Node-IPC Versions Targeting Developer Secrets",
+    "url": "https://thehackernews.com/2026/05/stealer-backdoor-found-in-3-node-ipc.html",
+    "published": "Thu, 14 May 2026 22:52:43 +0530",
+    "summary": "Cybersecurity researchers are sounding the alarm about what has been described as \"malicious activity\" in newly published versions of node-ipc.\nAccording to Socket and StepSecurity, three different ve"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] TeamPCP hackers advertise Mistral AI code repos for sale",
+    "url": "https://www.bleepingcomputer.com/news/security/teampcp-hackers-advertise-mistral-ai-code-repos-for-sale/",
+    "published": "Thu, 14 May 2026 18:50:36 -0400",
+    "summary": "The TeamPCP hacker group is threatening to leak source code from the Mistral AI project unless a buyer is found for the data. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Hackers exploit auth bypass flaw in Burst Statistics WordPress plugin",
+    "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-auth-bypass-flaw-in-burst-statistics-wordpress-plugin/",
+    "published": "Thu, 14 May 2026 17:07:17 -0400",
+    "summary": "Hackers are leveraging a critical authentication bypass vulnerability in the WordPress plugin Burst Statistics to obtain admin-level access to websites. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Cisco warns of new critical SD-WAN flaw exploited in zero-day attacks",
+    "url": "https://www.bleepingcomputer.com/news/security/cisco-warns-of-new-critical-sd-wan-flaw-exploited-in-zero-day-attacks/",
+    "published": "Thu, 14 May 2026 16:09:56 -0400",
+    "summary": "Cisco is warning that a critical Catalyst SD-WAN Controller authentication bypass flaw, tracked as CVE-2026-20182, was actively exploited in zero-day attacks that allowed attackers to gain administrat"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] OpenAI confirms security breach in TanStack supply chain attack",
+    "url": "https://www.bleepingcomputer.com/news/security/openai-confirms-security-breach-in-tanstack-supply-chain-attack/",
+    "published": "Thu, 14 May 2026 15:07:24 -0400",
+    "summary": "OpenAI says two employees' devices were breached in the recent TanStack supply chain attack that impacted hundreds of npm and PyPI packages, causing the company to rotate code-signing certificates for"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Windows 11 and Microsoft Edge hacked at Pwn2Own Berlin 2026",
+    "url": "https://www.bleepingcomputer.com/news/security/windows-11-and-microsoft-edge-hacked-on-first-day-of-pwn2own-berlin-2026/",
+    "published": "Thu, 14 May 2026 14:53:50 -0400",
+    "summary": "On the first day of Pwn2Own Berlin 2026, security researchers collected $523,000 in cash awards after exploiting 24 unique zero-days. [...]"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Security",
+    "title": "[The Hacker News] Turla Turns Kazuar Backdoor Into Modular P2P Botnet for Persistent Access",
+    "url": "https://thehackernews.com/2026/05/turla-turns-kazuar-backdoor-into.html",
+    "published": "Fri, 15 May 2026 22:40:25 +0530",
+    "summary": "The Russian state-sponsored hacking group known as\n  \n    Turla\n  \n  has transformed its custom backdoor Kazuar into a modular peer-to-peer (P2P) botnet that's engineered for stealth and persistent ac"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Funnel Builder WordPress plugin bug exploited to steal credit cards",
+    "url": "https://www.bleepingcomputer.com/news/security/funnel-builder-wordpress-plugin-bug-exploited-to-steal-credit-cards/",
+    "published": "Fri, 15 May 2026 15:30:33 -0400",
+    "summary": "A critical vulnerability in the Funnel Builder plugin for WordPress is being actively exploited to inject malicious JavaScript snippets into WooCommerce checkout pages. [...]"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Microsoft Exchange, Windows 11 hacked on second day of Pwn2Own",
+    "url": "https://www.bleepingcomputer.com/news/security/pwn2own-day-two-hackers-demo-microsoft-exchange-windows-11-red-had-enterprise-linux-zero-days/",
+    "published": "Fri, 15 May 2026 13:47:25 -0400",
+    "summary": "​During the second day of Pwn2Own Berlin 2026, competitors collected $385,750 in cash awards after exploiting 15 unique zero-day vulnerabilities in multiple products, including Windows 11, Microsoft E"
+  },
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] Popular node-ipc npm package compromised to steal credentials",
+    "url": "https://www.bleepingcomputer.com/news/security/popular-node-ipc-npm-package-compromised-to-steal-credentials/",
+    "published": "Fri, 15 May 2026 13:10:42 -0400",
+    "summary": "Hackers have injected credential-stealing malware into newly published versions of node-ipc, a popular inter-process communication package, in a new supply chain attack targeting npm. [...]"
+  }
+]

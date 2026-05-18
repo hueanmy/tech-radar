@@ -1,0 +1,9 @@
+[
+  {
+    "source": "Security",
+    "title": "[Bleeping Computer] New Windows 'MiniPlasma' zero-day exploit gives SYSTEM access, PoC released",
+    "url": "https://www.bleepingcomputer.com/news/microsoft/new-windows-miniplasma-zero-day-exploit-gives-system-access-poc-released/",
+    "published": "Sun, 17 May 2026 18:30:08 -0400",
+    "summary": "A cybersecurity researcher has released a proof-of-concept exploit for a Windows privilege escalation zero-day dubbed \"MiniPlasma\" that lets attackers gain SYSTEM privileges on fully patched Windows s"
+  }
+]

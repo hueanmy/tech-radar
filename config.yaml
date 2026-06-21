@@ -32,7 +32,7 @@ sources:
     # Ngôn ngữ cần theo dõi (empty = all languages)
     languages: [typescript, python, swift, rust]
     # Chỉ giữ repo có keyword này trong title/description
-    keywords: [ai, llm, agent, mcp, claude, gpt, rag, llama]
+    keywords: []
 
   security:
     enabled: true

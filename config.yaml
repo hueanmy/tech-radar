@@ -33,6 +33,8 @@ sources:
     languages: [typescript, python, swift, rust]
     # Chỉ giữ repo có keyword này trong title/description
     keywords: []
+    # Dùng Claude (ANTHROPIC_API_KEY) để phân tích tại sao repo trending (tiếng Việt)
+    analyze: true
 
   security:
     enabled: true
